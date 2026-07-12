@@ -57,6 +57,10 @@ public-source-extractor https://example.com/ --mode json --pretty
 public-source-extractor https://example.com/ --output report.md
 ```
 
+Markdown front matterには`provider_credits_used`と`provider_elapsed_ms`が含まれます。
+experimental providerがcreditsを返さない場合、前者は`null`になります。後者はCLIが計測した
+ミリ秒です。どちらもmetadata-onlyの値で、provider raw responseやrequest IDは出力しません。
+
 `--output` は、既存fileとsymlinkを上書きしません。親directoryは事前に作成してください。
 
 ## Exit code

@@ -61,6 +61,12 @@ Markdown to stdout:
 public-source-extractor https://example.com/
 ```
 
+Markdown front matter includes `provider_credits_used` and
+`provider_elapsed_ms`. The credits field is `null` when the experimental
+provider does not report it; elapsed time is measured by the CLI in
+milliseconds. These are metadata-only values. Raw provider responses and
+request identifiers are not exposed.
+
 JSON to stdout:
 
 ```bash
