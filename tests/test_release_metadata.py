@@ -10,7 +10,7 @@ import public_source_extractor
 
 ROOT = Path(__file__).resolve().parents[1]
 PACKAGE_VERSION = "0.1.0a1"
-TAG_CANDIDATE = "v0.1.0-alpha.1"
+TAG_VERSION = "v0.1.0-alpha.1"
 
 
 class ReleaseMetadataTests(unittest.TestCase):
@@ -24,12 +24,17 @@ class ReleaseMetadataTests(unittest.TestCase):
             encoding="utf-8"
         )
         self.assertIn(PACKAGE_VERSION, release_notes)
-        self.assertIn(TAG_CANDIDATE, release_notes)
+        self.assertIn(TAG_VERSION, release_notes)
+        self.assertNotIn("release candidate", release_notes.lower())
+        self.assertNotIn("tag candidate", release_notes.lower())
 
-    def test_readme_install_is_pinned_to_candidate_tag(self) -> None:
+    def test_readme_install_is_pinned_to_release_tag(self) -> None:
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        pattern = re.escape(f"public-source-extractor.git@{TAG_CANDIDATE}")
+        pattern = re.escape(f"public-source-extractor.git@{TAG_VERSION}")
         self.assertGreaterEqual(len(re.findall(pattern, readme)), 2)
+        self.assertNotIn("release candidate", readme.lower())
+        self.assertNotIn("tag does not exist", readme.lower())
+        self.assertNotIn("after the approved", readme.lower())
 
 
 if __name__ == "__main__":

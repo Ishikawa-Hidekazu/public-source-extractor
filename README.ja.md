@@ -35,9 +35,9 @@ python3 -m pip install .
 pipx install .
 ```
 
-source-only alpha中はPyPI packageとtagged releaseを公開しません。
+初回source-only alphaはPyPIへ公開しません。
 
-承認後にsource-only alpha tagが公開されたら、次のようにrevisionを固定してinstallできます。
+source-only alphaは、次のようにtagへ固定してinstallできます。
 
 ```bash
 pipx install 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0-alpha.1'
@@ -47,7 +47,7 @@ pipx install 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.g
 python3 -m pip install 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0-alpha.1'
 ```
 
-releaseが明示承認されるまで、このtagは作成されません。初回alphaではPyPI公開と手作業build artifact添付を行わない方針です。
+初回alphaではPyPI公開と手作業build artifact添付を行いません。
 
 ## 使い方
 
@@ -95,7 +95,7 @@ network smoke testはoffline test suiteと分離します。
 
 ## Status
 
-source-only alpha release candidateです。package version `0.1.0a1` はtag候補 `v0.1.0-alpha.1` に対応します。`firecrawl-keyless`の継続性やservice availabilityは保証しません。
+source-only alphaです。package version `0.1.0a1` はtag `v0.1.0-alpha.1` に対応します。`firecrawl-keyless`の継続性やservice availabilityは保証しません。
 
 ## License
 

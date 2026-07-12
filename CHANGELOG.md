@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
-## [0.1.0-alpha.1] - Pending
+## [0.1.0-alpha.1] - 2026-07-12
 
 ### Added
 
@@ -35,4 +35,3 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 [Unreleased]: https://github.com/Ishikawa-Hidekazu/public-source-extractor/compare/v0.1.0-alpha.1...HEAD
 [0.1.0-alpha.1]: https://github.com/Ishikawa-Hidekazu/public-source-extractor/releases/tag/v0.1.0-alpha.1
-
