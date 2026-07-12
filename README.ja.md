@@ -1,5 +1,7 @@
 # Public Source Extractor
 
+[![Release](https://img.shields.io/github/v/release/Ishikawa-Hidekazu/public-source-extractor?include_prereleases)](https://github.com/Ishikawa-Hidekazu/public-source-extractor/releases)
+
 > [!IMPORTANT]
 > 入力した公開URLは、抽出のため **Firecrawl Cloud** へ送信されます。`firecrawl-keyless` providerはexperimentalです。利用可能性、匿名REST access、credit上限、長期継続は保証されません。
 
@@ -34,6 +36,18 @@ pipx install .
 ```
 
 source-only alpha中はPyPI packageとtagged releaseを公開しません。
+
+承認後にsource-only alpha tagが公開されたら、次のようにrevisionを固定してinstallできます。
+
+```bash
+pipx install 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0-alpha.1'
+```
+
+```bash
+python3 -m pip install 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0-alpha.1'
+```
+
+releaseが明示承認されるまで、このtagは作成されません。初回alphaではPyPI公開と手作業build artifact添付を行わない方針です。
 
 ## 使い方
 
@@ -81,9 +95,8 @@ network smoke testはoffline test suiteと分離します。
 
 ## Status
 
-source-only alphaです。`firecrawl-keyless`の継続性やservice availabilityは保証しません。
+source-only alpha release candidateです。package version `0.1.0a1` はtag候補 `v0.1.0-alpha.1` に対応します。`firecrawl-keyless`の継続性やservice availabilityは保証しません。
 
 ## License
 
 MIT Licenseです。
-
