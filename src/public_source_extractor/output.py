@@ -72,6 +72,8 @@ def render_markdown(envelope: dict[str, Any]) -> str:
         "source_http_status": metadata["source_http_status"],
         "provider": provider["name"],
         "provider_access": provider["access"],
+        "provider_credits_used": provider["credits_used"],
+        "provider_elapsed_ms": provider["elapsed_ms"],
     }
     lines = ["---"]
     lines.extend(

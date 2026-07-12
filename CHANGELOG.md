@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Added
+
+- Expose provider credit usage and elapsed time in Markdown front matter.
+
 ## [0.1.0-alpha.1] - 2026-07-12
 
 ### Added

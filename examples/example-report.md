@@ -8,6 +8,8 @@ content_type: "text/html"
 source_http_status: 200
 provider: "firecrawl-keyless"
 provider_access: "experimental"
+provider_credits_used: 5
+provider_elapsed_ms: 1000
 ---
 
 # Example Domain
@@ -15,4 +17,3 @@ provider_access: "experimental"
 This domain is for use in documentation examples without needing permission.
 
 [Learn more](https://iana.org/domains/example)
-

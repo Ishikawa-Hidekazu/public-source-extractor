@@ -21,6 +21,8 @@ class PublicExampleTests(unittest.TestCase):
         example = (ROOT / "examples/example-report.md").read_text(encoding="utf-8")
         self.assertIn('source_url: "https://example.com/"', example)
         self.assertIn('provider: "firecrawl-keyless"', example)
+        self.assertIn("provider_credits_used: 5", example)
+        self.assertIn("provider_elapsed_ms: 1000", example)
 
 
 if __name__ == "__main__":

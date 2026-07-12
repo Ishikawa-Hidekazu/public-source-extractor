@@ -5,10 +5,43 @@ import unittest
 from pathlib import Path
 
 from public_source_extractor.errors import OutputFailure
-from public_source_extractor.output import write_new_file_atomic
+from public_source_extractor.output import render_markdown, write_new_file_atomic
+
+
+def _envelope(credits_used: int | None = 5, elapsed_ms: int = 1234) -> dict:
+    return {
+        "schema_version": "0.1",
+        "source": {
+            "requested_url": "https://example.com/",
+            "resolved_url": "https://example.com/",
+            "fetched_at": "2026-07-12T00:00:00Z",
+        },
+        "content": "# Example",
+        "metadata": {
+            "title": "Example Domain",
+            "content_type": "text/html",
+            "source_http_status": 200,
+        },
+        "provider": {
+            "name": "firecrawl-keyless",
+            "access": "experimental",
+            "credits_used": credits_used,
+            "elapsed_ms": elapsed_ms,
+        },
+    }
 
 
 class OutputTests(unittest.TestCase):
+    def test_markdown_front_matter_includes_provider_metrics(self) -> None:
+        rendered = render_markdown(_envelope())
+        self.assertIn("provider_credits_used: 5\n", rendered)
+        self.assertIn("provider_elapsed_ms: 1234\n", rendered)
+
+    def test_markdown_front_matter_keeps_unknown_credits_explicit(self) -> None:
+        rendered = render_markdown(_envelope(credits_used=None))
+        self.assertIn("provider_credits_used: null\n", rendered)
+        self.assertIn("provider_elapsed_ms: 1234\n", rendered)
+
     def test_writes_new_file(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "report.md"
