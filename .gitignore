@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.py[cod]
+build/
+dist/
+*.egg-info/
+.ruff_cache/
+.wheel-qa/
+*.out
+*.err

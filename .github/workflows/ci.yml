@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test-build-install:
+    name: ${{ matrix.os }} / Python ${{ matrix.python-version }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - name: Install development dependencies
+        run: python -m pip install --upgrade pip && python -m pip install -e '.[dev]'
+      - name: Ruff
+        run: ruff check src tests
+      - name: Offline tests and contract fixtures
+        run: PYTHONPATH=src python -m unittest discover -s tests -v
+      - name: Isolated package build
+        run: python -m build
+      - name: Fresh wheel install
+        shell: bash
+        run: |
+          python -m venv .wheel-qa
+          .wheel-qa/bin/python -m pip install --no-deps dist/*.whl
+          .wheel-qa/bin/public-source-extractor --version
+          set +e
+          .wheel-qa/bin/public-source-extractor >missing.out 2>missing.err
+          status=$?
+          set -e
+          test "$status" -eq 2
+          test ! -s missing.out
+          .wheel-qa/bin/python -c 'import json; data=json.load(open("missing.err")); assert data["error"]["code"] == "input_rejected"'
+      - name: Packaged schema check
+        run: .wheel-qa/bin/python -c 'from importlib.resources import files; assert files("public_source_extractor.schemas").joinpath("output-v0.1.schema.json").is_file()'

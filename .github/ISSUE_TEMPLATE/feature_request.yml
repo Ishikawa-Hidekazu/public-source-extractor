@@ -1,0 +1,26 @@
+name: Feature request
+description: Propose a focused improvement within the public-source safety boundary.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What public-page extraction workflow is difficult today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+    validations:
+      required: true
+  - type: textarea
+    id: safety
+    attributes:
+      label: Safety and contract impact
+      description: Explain URL, provider, output, schema, or credential implications.
+    validations:
+      required: true
+

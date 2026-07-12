@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Ishikawa-Hidekazu/public-source-extractor/blob/main/schemas/output-v0.1.schema.json",
+  "title": "Public Source Extractor Output v0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "ok"],
+  "properties": {
+    "schema_version": {"const": "0.1"},
+    "ok": {"type": "boolean"},
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requested_url", "resolved_url", "fetched_at"],
+      "properties": {
+        "requested_url": {"type": "string", "format": "uri"},
+        "resolved_url": {"type": ["string", "null"], "format": "uri"},
+        "fetched_at": {"type": "string", "format": "date-time"}
+      }
+    },
+    "mode": {"enum": ["markdown", "json"]},
+    "content": {"oneOf": [{"type": "string"}, {"type": "object"}]},
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "description", "content_type", "source_http_status"],
+      "properties": {
+        "title": {"type": ["string", "null"]},
+        "description": {"type": ["string", "null"]},
+        "content_type": {"type": ["string", "null"]},
+        "source_http_status": {"type": ["integer", "null"], "minimum": 100, "maximum": 599}
+      }
+    },
+    "provider": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "access", "http_status", "credits_used", "elapsed_ms"],
+      "properties": {
+        "name": {"type": "string", "const": "firecrawl-keyless", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"},
+        "access": {"const": "experimental"},
+        "http_status": {"type": "integer", "minimum": 100, "maximum": 599},
+        "credits_used": {"type": ["integer", "null"], "minimum": 0},
+        "elapsed_ms": {"type": "integer", "minimum": 0}
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "message"],
+        "properties": {
+          "code": {"type": "string", "pattern": "^[a-z0-9_]+$"},
+          "message": {"type": "string"}
+        }
+      }
+    },
+    "error": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "message", "retryable"],
+      "properties": {
+        "code": {"type": "string", "pattern": "^[a-z0-9_]+$"},
+        "message": {"type": "string"},
+        "retryable": {"type": "boolean"}
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"ok": {"const": true}}, "required": ["ok"]},
+      "then": {
+        "required": ["source", "mode", "content", "metadata", "provider", "warnings"],
+        "not": {"required": ["error"]}
+      },
+      "else": {
+        "required": ["error"],
+        "not": {"anyOf": [{"required": ["content"]}, {"required": ["provider"]}]}
+      }
+    },
+    {
+      "if": {"properties": {"ok": {"const": true}, "mode": {"const": "markdown"}}, "required": ["ok", "mode"]},
+      "then": {"properties": {"content": {"type": "string"}}}
+    },
+    {
+      "if": {"properties": {"ok": {"const": true}, "mode": {"const": "json"}}, "required": ["ok", "mode"]},
+      "then": {"properties": {"content": {"type": "object"}}}
+    }
+  ]
+}

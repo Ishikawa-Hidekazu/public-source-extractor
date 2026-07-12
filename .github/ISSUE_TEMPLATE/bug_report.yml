@@ -1,0 +1,49 @@
+name: Bug report
+description: Report a reproducible CLI or documentation problem.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Do not include credentials, tokens, cookies, signed URLs, private pages, provider raw bodies, or private output.
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      placeholder: 0.1.0a1 or commit SHA
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: macOS 15, Python 3.13
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Public-safe reproduction
+      description: Use synthetic or intentionally public-safe input.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior and redacted error JSON
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety confirmation
+      options:
+        - label: I removed credentials, tokens, cookies, signed URLs, private content, and provider raw bodies.
+          required: true
+

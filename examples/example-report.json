@@ -1,0 +1,41 @@
+{
+  "schema_version": "0.1",
+  "ok": true,
+  "source": {
+    "requested_url": "https://example.com/",
+    "resolved_url": "https://example.com/",
+    "fetched_at": "2026-07-12T00:00:00Z"
+  },
+  "mode": "json",
+  "content": {
+    "title": "Example Domain",
+    "summary": "A documentation example page.",
+    "main_argument": "The domain is reserved for examples.",
+    "key_points": [
+      "It can be used in documentation without prior coordination."
+    ],
+    "external_sources": [
+      "https://iana.org/domains/example"
+    ]
+  },
+  "metadata": {
+    "title": "Example Domain",
+    "description": null,
+    "content_type": "text/html",
+    "source_http_status": 200
+  },
+  "provider": {
+    "name": "firecrawl-keyless",
+    "access": "experimental",
+    "http_status": 200,
+    "credits_used": 5,
+    "elapsed_ms": 1000
+  },
+  "warnings": [
+    {
+      "code": "experimental_provider",
+      "message": "Keyless availability and limits are not guaranteed."
+    }
+  ]
+}
+

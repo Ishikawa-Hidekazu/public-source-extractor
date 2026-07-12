@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "public-source-extractor"
+version = "0.1.0a1"
+description = "Convert a public URL into a reusable Markdown or JSON artifact."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{name = "Ishikawa Hidekazu"}]
+dependencies = []
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+]
+
+[project.urls]
+Homepage = "https://ishikawa.co/"
+Repository = "https://github.com/Ishikawa-Hidekazu/public-source-extractor"
+Issues = "https://github.com/Ishikawa-Hidekazu/public-source-extractor/issues"
+Changelog = "https://github.com/Ishikawa-Hidekazu/public-source-extractor/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+dev = [
+  "build>=1.2.2",
+  "jsonschema>=4.23",
+  "ruff>=0.12",
+]
+
+[project.scripts]
+public-source-extractor = "public_source_extractor.cli:main"
+
+[tool.setuptools.package-data]
+public_source_extractor = ["schemas/*.json"]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
