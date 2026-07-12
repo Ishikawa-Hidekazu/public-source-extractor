@@ -39,7 +39,7 @@ For an isolated command installation:
 pipx install .
 ```
 
-After the approved source-only alpha tag is published, install that exact source revision with:
+Install the source-only alpha from its pinned tag:
 
 ```bash
 pipx install 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0-alpha.1'
@@ -51,7 +51,7 @@ Or use pip in an existing Python environment:
 python3 -m pip install 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0-alpha.1'
 ```
 
-The tag does not exist until the release is explicitly approved and published. No PyPI package is planned for the initial source-only alpha.
+The initial source-only alpha is not published to PyPI.
 
 ## Quick start
 
@@ -138,7 +138,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md), and [SUPPORT
 
 ## Status
 
-Source-only alpha release candidate. Package version `0.1.0a1` maps to tag candidate `v0.1.0-alpha.1`. `firecrawl-keyless` is an experimental third-party provider, and no compatibility or service-availability guarantee is made.
+Source-only alpha. Package version `0.1.0a1` maps to tag `v0.1.0-alpha.1`. `firecrawl-keyless` is an experimental third-party provider, and no compatibility or service-availability guarantee is made.
 
 ## License
 
