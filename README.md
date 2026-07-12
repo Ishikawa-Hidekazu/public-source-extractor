@@ -1,6 +1,7 @@
 # Public Source Extractor
 
 [![CI](https://github.com/Ishikawa-Hidekazu/public-source-extractor/actions/workflows/ci.yml/badge.svg)](https://github.com/Ishikawa-Hidekazu/public-source-extractor/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/Ishikawa-Hidekazu/public-source-extractor?include_prereleases)](https://github.com/Ishikawa-Hidekazu/public-source-extractor/releases)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
 > [!IMPORTANT]
@@ -38,7 +39,19 @@ For an isolated command installation:
 pipx install .
 ```
 
-No PyPI package or tagged release is published during the source-only alpha stage.
+After the approved source-only alpha tag is published, install that exact source revision with:
+
+```bash
+pipx install 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0-alpha.1'
+```
+
+Or use pip in an existing Python environment:
+
+```bash
+python3 -m pip install 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0-alpha.1'
+```
+
+The tag does not exist until the release is explicitly approved and published. No PyPI package is planned for the initial source-only alpha.
 
 ## Quick start
 
@@ -125,9 +138,8 @@ See [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md), and [SUPPORT
 
 ## Status
 
-Source-only alpha. `firecrawl-keyless` is an experimental third-party provider. No compatibility or service-availability guarantee is made before a tagged release.
+Source-only alpha release candidate. Package version `0.1.0a1` maps to tag candidate `v0.1.0-alpha.1`. `firecrawl-keyless` is an experimental third-party provider, and no compatibility or service-availability guarantee is made.
 
 ## License
 
 MIT. See [LICENSE](LICENSE).
-
