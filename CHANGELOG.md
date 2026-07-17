@@ -9,6 +9,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Added
 
 - Expose provider credit usage and elapsed time in Markdown front matter.
+- Add English and Japanese recovery guidance for observed `provider_rate_limited` responses.
+- Clarify the narrow public-only contract relative to the official Firecrawl CLI.
+- Add fixture-only responsive terminal visuals and a reproducible Social Preview candidate.
+- Link to a real-world implementation and daily-use article.
 
 ## [0.1.0-alpha.1] - 2026-07-12
 

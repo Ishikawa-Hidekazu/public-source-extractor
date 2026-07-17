@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="750" height="1100" viewBox="0 0 750 1100">
+  <rect width="750" height="1100" fill="#0b1117"/>
+  <rect x="36" y="34" width="10" height="92" fill="#67d391"/>
+  <text x="70" y="76" fill="#f4f7f8" font-family="Arial, sans-serif" font-size="36" font-weight="700">Public Source Extractor</text>
+  <text x="70" y="114" fill="#c2cdd4" font-family="Arial, sans-serif" font-size="21" font-weight="600">One public URL → Markdown or stable JSON</text>
+
+  <rect x="36" y="158" width="678" height="534" rx="8" fill="#121b23" stroke="#344956" stroke-width="2"/>
+  <text x="66" y="206" fill="#67d391" font-family="Arial, sans-serif" font-size="25" font-weight="700">MARKDOWN</text>
+  <text x="66" y="252" fill="#f4f7f8" font-family="Menlo, monospace" font-size="20" font-weight="600">$ public-source-extractor</text>
+  <text x="66" y="288" fill="#8fd5f1" font-family="Menlo, monospace" font-size="20" font-weight="600">https://example.com/</text>
+  <line x1="66" y1="316" x2="684" y2="316" stroke="#344956" stroke-width="2"/>
+  <text x="66" y="362" fill="#8fd5f1" font-family="Menlo, monospace" font-size="20" font-weight="600">source_url:</text>
+  <text x="66" y="398" fill="#f4f7f8" font-family="Menlo, monospace" font-size="20" font-weight="600">"https://example.com/"</text>
+  <text x="66" y="446" fill="#c2cdd4" font-family="Menlo, monospace" font-size="20" font-weight="600">provider: "firecrawl-keyless"</text>
+  <text x="66" y="494" fill="#c2cdd4" font-family="Menlo, monospace" font-size="20" font-weight="600">access: "experimental"</text>
+  <text x="66" y="558" fill="#f4f7f8" font-family="Arial, sans-serif" font-size="28" font-weight="700"># Example Domain</text>
+  <text x="66" y="602" fill="#c2cdd4" font-family="Arial, sans-serif" font-size="20" font-weight="600">Fixture-only documentation content.</text>
+  <text x="66" y="650" fill="#67d391" font-family="Arial, sans-serif" font-size="19" font-weight="700">NO CREDENTIALS • NO PRIVATE URL</text>
+
+  <rect x="36" y="728" width="678" height="256" rx="8" fill="#121b23" stroke="#344956" stroke-width="2"/>
+  <text x="66" y="778" fill="#ffc977" font-family="Arial, sans-serif" font-size="24" font-weight="700">STABLE ERROR CONTRACT</text>
+  <text x="66" y="830" fill="#f4f7f8" font-family="Menlo, monospace" font-size="20" font-weight="600">"code": "provider_rate_limited"</text>
+  <text x="66" y="874" fill="#f4f7f8" font-family="Menlo, monospace" font-size="20" font-weight="600">"retryable": true</text>
+  <line x1="66" y1="906" x2="684" y2="906" stroke="#344956" stroke-width="2"/>
+  <text x="66" y="950" fill="#c2cdd4" font-family="Arial, sans-serif" font-size="19" font-weight="600">stdout empty • stderr one JSON object</text>
+
+  <text x="36" y="1042" fill="#a9b7c2" font-family="Arial, sans-serif" font-size="19" font-weight="600">Fixture-only • Raw provider body not exposed</text>
+</svg>
