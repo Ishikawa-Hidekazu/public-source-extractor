@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="820" viewBox="0 0 1200 820">
+  <rect width="1200" height="820" fill="#0b1117"/>
+  <rect x="48" y="42" width="12" height="92" fill="#67d391"/>
+  <text x="84" y="82" fill="#f4f7f8" font-family="Arial, sans-serif" font-size="42" font-weight="700">Public Source Extractor</text>
+  <text x="84" y="122" fill="#c2cdd4" font-family="Arial, sans-serif" font-size="24" font-weight="600">One public URL → reviewable Markdown or stable JSON</text>
+
+  <rect x="48" y="166" width="1104" height="360" rx="8" fill="#121b23" stroke="#344956" stroke-width="2"/>
+  <text x="80" y="216" fill="#67d391" font-family="Arial, sans-serif" font-size="24" font-weight="700">MARKDOWN</text>
+  <text x="80" y="260" fill="#f4f7f8" font-family="Menlo, monospace" font-size="22" font-weight="600">$ public-source-extractor https://example.com/</text>
+  <line x1="80" y1="284" x2="1120" y2="284" stroke="#344956" stroke-width="2"/>
+  <text x="80" y="328" fill="#8fd5f1" font-family="Menlo, monospace" font-size="21" font-weight="600">source_url: "https://example.com/"</text>
+  <text x="80" y="370" fill="#c2cdd4" font-family="Menlo, monospace" font-size="21" font-weight="600">provider: "firecrawl-keyless"</text>
+  <text x="80" y="412" fill="#c2cdd4" font-family="Menlo, monospace" font-size="21" font-weight="600">provider_access: "experimental"</text>
+  <text x="80" y="466" fill="#f4f7f8" font-family="Arial, sans-serif" font-size="28" font-weight="700"># Example Domain</text>
+  <text x="80" y="500" fill="#c2cdd4" font-family="Arial, sans-serif" font-size="21" font-weight="600">Fixture-only content reserved for documentation examples.</text>
+
+  <rect x="48" y="558" width="1104" height="184" rx="8" fill="#121b23" stroke="#344956" stroke-width="2"/>
+  <text x="80" y="608" fill="#ffc977" font-family="Arial, sans-serif" font-size="24" font-weight="700">STABLE ERROR CONTRACT</text>
+  <text x="80" y="654" fill="#f4f7f8" font-family="Menlo, monospace" font-size="21" font-weight="600">{"code":"provider_rate_limited","retryable":true}</text>
+  <text x="80" y="704" fill="#c2cdd4" font-family="Arial, sans-serif" font-size="20" font-weight="600">stdout empty • stderr one JSON object • raw provider body not exposed</text>
+
+  <text x="48" y="786" fill="#a9b7c2" font-family="Arial, sans-serif" font-size="19" font-weight="600">Fixture-only visual • No credentials, cookies, private URLs, or provider response bodies</text>
+</svg>

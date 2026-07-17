@@ -23,6 +23,12 @@ The CLI does **not** read API keys, credentials, cookies, browser profiles, loca
 
 It is not a crawler, browser automation tool, login helper, source-reliability judge, or private-page extractor.
 
+### How this differs from the official Firecrawl CLI
+
+The [official Firecrawl CLI](https://github.com/firecrawl/cli) is the broader Firecrawl interface for authenticated scrape, search, crawl, map, interact, agent, and self-hosted workflows. Use it when you need Firecrawl's full product surface.
+
+Public Source Extractor is intentionally narrower: one public URL, no credential discovery, a public-only URL policy, no-overwrite output, and a stable JSON success/error contract designed for reviewable AI research artifacts. It uses the experimental `firecrawl-keyless` provider and does not replace or wrap the official CLI.
+
 ## Install
 
 Public Source Extractor requires Python 3.11 or newer.
@@ -81,6 +87,18 @@ public-source-extractor https://example.com/ --output report.md
 
 The output path must have an existing non-symlink parent and must not already exist.
 
+<picture>
+  <source media="(max-width: 600px)" srcset="assets/source/terminal-example-mobile.svg">
+  <img src="assets/source/terminal-example.svg" alt="Fixture-only Public Source Extractor terminal example showing one public example.com URL converted to Markdown, followed by the stable provider_rate_limited JSON error contract.">
+</picture>
+
+[View the public-safe examples](examples/) ·
+[View the reproducible visual sources](assets/source/README.md)
+
+## Real-world use
+
+[This Japanese implementation log](https://taupe.site/entry/public-source-extractor-ai-research-cli/) shows the CLI used to turn selected public sources into reviewable Markdown and JSON artifacts. It also documents the Firecrawl Cloud boundary, untrusted extracted content, and observed provider limits.
+
 ## CLI contract
 
 ```text
@@ -100,6 +118,25 @@ public-source-extractor <url> [--mode markdown|json]
 | `5` | Output path or write failure |
 
 On failure, stdout is empty and stderr contains exactly one JSON error object. Provider response bodies, stack traces, request IDs, and local paths are not exposed.
+
+### Recovering from `provider_rate_limited`
+
+The experimental provider can return HTTP 429 during short bursts or across an anonymous usage window. This is a provider availability condition, not by itself a failure of the local URL policy or parser.
+
+When stderr reports `provider_rate_limited` with `retryable: true`:
+
+```json
+{"schema_version":"0.1","ok":false,"error":{"code":"provider_rate_limited","message":"The experimental provider rate limit was exceeded.","retryable":true}}
+```
+
+The process exits with code `3` and stdout remains empty.
+
+1. Stop the current burst instead of retrying repeatedly.
+2. Wait and retry later. This CLI does not promise an exact delay when no retry timing is safely exposed.
+3. Reduce request volume and process only selected public sources.
+4. Use the original public page directly when extraction is not required.
+
+The CLI does not automatically retry, switch providers, discover credentials, or expose raw provider bodies. See [Issue #9](https://github.com/Ishikawa-Hidekazu/public-source-extractor/issues/9) for the observed condition and documentation scope.
 
 ## Safety boundary
 
