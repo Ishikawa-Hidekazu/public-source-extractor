@@ -6,7 +6,7 @@
 
 ## Description
 
-`Turn public web pages into AI-ready Markdown or JSON with explicit safety boundaries.`
+`Validate public URLs and turn them into reviewable AI-ready Markdown or JSON.`
 
 ## Homepage
 
@@ -29,5 +29,6 @@ Replace with a dedicated explanatory article after publication if it gives users
 
 ## Visibility and release
 
-Remain local and private until explicit central approval. Do not create the GitHub repository, remote, tag, release, package registry entry, or PyPI project from this document alone.
-
+The repository and `v0.1.0-alpha.1` prerelease are public. This document does
+not authorize a new tag, release, package-registry entry, PyPI project, or
+repository-settings change.

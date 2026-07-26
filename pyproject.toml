@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "public-source-extractor"
 version = "0.1.0a1"
-description = "Convert a public URL into a reusable Markdown or JSON artifact."
+description = "Validate a public URL and convert it into reviewable AI-ready Markdown or JSON."
 readme = "README.md"
 requires-python = ">=3.11"
 license = "MIT"
@@ -29,7 +29,7 @@ Changelog = "https://github.com/Ishikawa-Hidekazu/public-source-extractor/blob/m
 dev = [
   "build>=1.2.2",
   "jsonschema>=4.23",
-  "ruff>=0.12",
+  "ruff>=0.12,<0.16",
 ]
 
 [project.scripts]

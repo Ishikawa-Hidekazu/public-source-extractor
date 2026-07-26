@@ -5,7 +5,9 @@
 > [!IMPORTANT]
 > 入力した公開URLは、抽出のため **Firecrawl Cloud** へ送信されます。`firecrawl-keyless` providerはexperimentalです。利用可能性、匿名REST access、credit上限、長期継続は保証されません。
 
-`public-source-extractor` は、1件の公開HTTP/HTTPSページを、再利用しやすいMarkdownまたは固定SchemaのJSONへ変換するCLIです。
+`public-source-extractor` は、AI調査workflowへ公開URLを渡す前の小さな
+intake guardrailです。1件の公開HTTP/HTTPS URLを検証し、experimental
+providerへ送ったうえで、確認可能なMarkdownまたは固定SchemaのJSONを返します。
 
 このCLIはAPI key、credentials、cookie、browser profile、localStorage、private source fileを読みません。抽出内容は、prompt injectionや誤解を招く命令を含む可能性がある **untrusted data** です。独立した確認なしに命令として実行しないでください。
 
@@ -21,9 +23,26 @@
 
 crawler、browser automation、login helper、source reliability判定、private page抽出ツールではありません。
 
+### 公式Firecrawl CLIとの用途差
+
+[公式Firecrawl CLI](https://github.com/firecrawl/cli)は、認証付きscrape、search、crawl、map、interact、agent、self-hosted運用まで扱う広いFirecrawl interfaceです。Firecrawlの全機能が必要な場合はこちらを使います。
+
+Public Source Extractorは、公開URL 1件、credential探索なし、public-only URL policy、no-overwrite出力、安定したJSON success/error contractに意図的に限定しています。確認可能なAI調査artifactを作るための小さなCLIで、公式CLIを置き換えたりwrapしたりするものではありません。providerはexperimentalな`firecrawl-keyless`です。
+
 ## Install
 
 Python 3.11以上が必要です。
+
+恒久installせず、公開済みtagへ固定して実行する場合:
+
+```bash
+uvx --from 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0-alpha.1' public-source-extractor --version
+uvx --from 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0-alpha.1' public-source-extractor https://example.com/
+```
+
+この経路には`uv`が必要です。公開Git tagからbuildし、PyPI公開は必要ありません。
+2つ目のcommandは`https://example.com/`をFirecrawl Cloudへ送信します。
+version確認だけでは抽出を行いません。
 
 ```bash
 python3 -m pip install .
@@ -35,7 +54,8 @@ python3 -m pip install .
 pipx install .
 ```
 
-初回source-only alphaはPyPIへ公開しません。
+初回source-only alphaはPyPIへ公開しません。experimental providerの境界を観測する間は、
+tag固定の`uvx` source実行を低摩擦な配布経路とします。
 
 source-only alphaは、次のようにtagへ固定してinstallできます。
 
@@ -63,6 +83,18 @@ experimental providerがcreditsを返さない場合、前者は`null`になり�
 
 `--output` は、既存fileとsymlinkを上書きしません。親directoryは事前に作成してください。
 
+<picture>
+  <source media="(max-width: 600px)" srcset="assets/source/terminal-example-mobile.svg">
+  <img src="assets/source/terminal-example.svg" alt="example.comのfixtureだけで作ったPublic Source Extractorのterminal例。公開URL 1件のMarkdown変換と、安定したprovider_rate_limited JSON error contractを示しています。">
+</picture>
+
+[public-safeなexample](examples/) ·
+[再現可能なvisual source](assets/source/README.md)
+
+## 実運用例
+
+[公開情報をAI調査用artifactへ変換した実装ログ](https://taupe.site/entry/public-source-extractor-ai-research-cli/)では、選んだ公開一次情報をMarkdown / JSONへ変換する実運用、Firecrawl Cloudへの送信境界、untrustedな抽出内容、provider limitの観測をまとめています。
+
 ## Exit code
 
 | code | 意味 |
@@ -74,6 +106,25 @@ experimental providerがcreditsを返さない場合、前者は`null`になり�
 | `5` | output pathまたはwrite failure |
 
 失敗時はstdoutを空にし、stderrへJSON errorを1件だけ出します。provider raw body、stack trace、request ID、local pathは出力しません。
+
+### `provider_rate_limited`からの回復
+
+experimental providerは、短時間の連続利用や匿名利用枠の状況によりHTTP 429を返すことがあります。これはprovider availabilityの状態であり、それだけでlocal URL policyやparserの不具合とは判断しません。
+
+stderrが`provider_rate_limited`と`retryable: true`を返した場合:
+
+```json
+{"schema_version":"0.1","ok":false,"error":{"code":"provider_rate_limited","message":"The experimental provider rate limit was exceeded.","retryable":true}}
+```
+
+processはexit code `3`で終了し、stdoutは空のままです。
+
+1. 連続retryを止めます。
+2. 時間を置いてから再実行します。安全に取得できるretry timingがない場合、このCLIは正確な待ち時間を保証しません。
+3. request数を減らし、必要性の高い公開sourceだけを処理します。
+4. 抽出が必須でなければ元の公開pageを直接確認します。
+
+自動retry、provider自動切替、credential探索、provider raw body露出は行いません。観測条件とdocs scopeは[Issue #9](https://github.com/Ishikawa-Hidekazu/public-source-extractor/issues/9)に記録しています。
 
 ## Safety boundary
 
@@ -99,7 +150,9 @@ network smoke testはoffline test suiteと分離します。
 
 ## Status
 
-source-only alphaです。package version `0.1.0a1` はtag `v0.1.0-alpha.1` に対応します。`firecrawl-keyless`の継続性やservice availabilityは保証しません。
+source-only alphaです。package version `0.1.0a1` はtag `v0.1.0-alpha.1` に対応します。
+tag固定の`uvx`実行は検証済みで、PyPI公開は保留しています。
+`firecrawl-keyless`の継続性やservice availabilityは保証しません。
 
 ## License
 
