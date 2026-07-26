@@ -46,6 +46,9 @@ class VisualAssetTests(unittest.TestCase):
             self.assertIn('"retryable":true', content)
             self.assertRegex(content, r"exit(?:s with)? code `3`|Exit.*`3`")
             self.assertIn("https://github.com/firecrawl/cli", content)
+            self.assertIn("intake guardrail", content)
+            self.assertIn("uvx --from", content)
+            self.assertRegex(content, r"PyPI(?: publication remains|公開は保留)")
 
 
 if __name__ == "__main__":

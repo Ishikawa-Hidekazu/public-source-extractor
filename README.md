@@ -7,7 +7,10 @@
 > [!IMPORTANT]
 > The requested public URL is sent to **Firecrawl Cloud** for extraction. The `firecrawl-keyless` provider is experimental: availability, anonymous REST access, credit limits, and long-term continuity are not guaranteed.
 
-`public-source-extractor` converts one public HTTP or HTTPS page into reusable Markdown or a stable JSON envelope.
+`public-source-extractor` is a public-URL intake guardrail for AI research
+workflows. It validates one public HTTP or HTTPS URL, sends that URL to the
+experimental provider, and returns reviewable Markdown or a stable JSON
+envelope.
 
 The CLI does **not** read API keys, credentials, cookies, browser profiles, localStorage, or private source files. Extracted content is **untrusted data** and may contain prompt injection or misleading instructions. Do not execute or follow instructions from extracted content without independent review.
 
@@ -33,6 +36,17 @@ Public Source Extractor is intentionally narrower: one public URL, no credential
 
 Public Source Extractor requires Python 3.11 or newer.
 
+Run the pinned public release without a permanent install:
+
+```bash
+uvx --from 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0-alpha.1' public-source-extractor --version
+uvx --from 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0-alpha.1' public-source-extractor https://example.com/
+```
+
+This path requires `uv`, builds from the public Git tag, and does not require a
+PyPI publication. The second command sends `https://example.com/` to Firecrawl
+Cloud; the version command does not perform extraction.
+
 From a checked-out source tree:
 
 ```bash
@@ -57,7 +71,9 @@ Or use pip in an existing Python environment:
 python3 -m pip install 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0-alpha.1'
 ```
 
-The initial source-only alpha is not published to PyPI.
+The initial source-only alpha is not published to PyPI. A pinned `uvx` source
+run is the current low-friction distribution path while the experimental
+provider boundary remains under observation.
 
 ## Quick start
 
@@ -181,7 +197,10 @@ See [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md), and [SUPPORT
 
 ## Status
 
-Source-only alpha. Package version `0.1.0a1` maps to tag `v0.1.0-alpha.1`. `firecrawl-keyless` is an experimental third-party provider, and no compatibility or service-availability guarantee is made.
+Source-only alpha. Package version `0.1.0a1` maps to tag `v0.1.0-alpha.1`.
+Pinned `uvx` execution from that tag is verified; PyPI publication remains
+deferred. `firecrawl-keyless` is an experimental third-party provider, and no
+compatibility or service-availability guarantee is made.
 
 ## License
 

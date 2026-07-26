@@ -11,6 +11,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Expose provider credit usage and elapsed time in Markdown front matter.
 - Add English and Japanese recovery guidance for observed `provider_rate_limited` responses.
 - Clarify the narrow public-only contract relative to the official Firecrawl CLI.
+- Position the CLI as a public-URL intake guardrail for reviewable AI research artifacts.
+- Document and verify pinned `uvx` execution directly from the public Git tag.
+- Keep PyPI publication deferred while the experimental provider boundary is observed.
 - Add fixture-only responsive terminal visuals and a reproducible Social Preview candidate.
 - Link to a real-world implementation and daily-use article.
 
