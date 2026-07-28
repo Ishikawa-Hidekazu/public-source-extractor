@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.1.0-alpha.2] - 2026-07-28
+
 ### Added
 
 - Expose provider credit usage and elapsed time in Markdown front matter.
@@ -13,7 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Clarify the narrow public-only contract relative to the official Firecrawl CLI.
 - Position the CLI as a public-URL intake guardrail for reviewable AI research artifacts.
 - Document and verify pinned `uvx` execution directly from the public Git tag.
-- Keep PyPI publication deferred while the experimental provider boundary is observed.
+- Add PyPI distribution through GitHub Actions Trusted Publishing.
 - Add fixture-only responsive terminal visuals and a reproducible Social Preview candidate.
 - Link to a real-world implementation and daily-use article.
 
@@ -44,5 +46,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - No crawler, authenticated-page support, browser automation, source-reliability judgment, or automatic provider fallback.
 - Initial release is source-only: no PyPI package and no manually attached build artifacts.
 
-[Unreleased]: https://github.com/Ishikawa-Hidekazu/public-source-extractor/compare/v0.1.0-alpha.1...HEAD
+[Unreleased]: https://github.com/Ishikawa-Hidekazu/public-source-extractor/compare/v0.1.0-alpha.2...HEAD
+[0.1.0-alpha.2]: https://github.com/Ishikawa-Hidekazu/public-source-extractor/compare/v0.1.0-alpha.1...v0.1.0-alpha.2
 [0.1.0-alpha.1]: https://github.com/Ishikawa-Hidekazu/public-source-extractor/releases/tag/v0.1.0-alpha.1

@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import re
+import subprocess
+import sys
 import tomllib
 import unittest
 from pathlib import Path
@@ -9,8 +11,8 @@ import public_source_extractor
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_VERSION = "0.1.0a1"
-TAG_VERSION = "v0.1.0-alpha.1"
+PACKAGE_VERSION = "0.1.0a2"
+TAG_VERSION = "v0.1.0-alpha.2"
 
 
 class ReleaseMetadataTests(unittest.TestCase):
@@ -20,7 +22,7 @@ class ReleaseMetadataTests(unittest.TestCase):
         self.assertEqual(public_source_extractor.__version__, PACKAGE_VERSION)
 
     def test_tag_mapping_is_documented(self) -> None:
-        release_notes = (ROOT / "docs/releases/v0.1.0-alpha.1.md").read_text(
+        release_notes = (ROOT / "docs/releases/v0.1.0-alpha.2.md").read_text(
             encoding="utf-8"
         )
         self.assertIn(PACKAGE_VERSION, release_notes)
@@ -28,13 +30,49 @@ class ReleaseMetadataTests(unittest.TestCase):
         self.assertNotIn("release candidate", release_notes.lower())
         self.assertNotIn("tag candidate", release_notes.lower())
 
-    def test_readme_install_is_pinned_to_release_tag(self) -> None:
+    def test_readme_install_identifies_package_and_tag_versions(self) -> None:
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        pattern = re.escape(f"public-source-extractor.git@{TAG_VERSION}")
-        self.assertGreaterEqual(len(re.findall(pattern, readme)), 2)
+        tag_pattern = re.escape(f"public-source-extractor.git@{TAG_VERSION}")
+        package_pattern = re.escape(f"public-source-extractor@{PACKAGE_VERSION}")
+        self.assertGreaterEqual(len(re.findall(tag_pattern, readme)), 1)
+        self.assertGreaterEqual(len(re.findall(package_pattern, readme)), 1)
         self.assertNotIn("release candidate", readme.lower())
         self.assertNotIn("tag does not exist", readme.lower())
         self.assertNotIn("after the approved", readme.lower())
+
+    def test_pypi_publish_workflow_uses_trusted_publishing(self) -> None:
+        workflow = (ROOT / ".github/workflows/publish-pypi.yml").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("id-token: write", workflow)
+        self.assertIn("environment:", workflow)
+        self.assertIn("name: pypi", workflow)
+        self.assertRegex(
+            workflow,
+            re.compile(r"pypa/gh-action-pypi-publish@[0-9a-f]{40}"),
+        )
+        self.assertIn("scripts/check-release-tag.py", workflow)
+        self.assertNotRegex(workflow, re.compile(r"PYPI_(?:TOKEN|PASSWORD)|password:"))
+
+    def test_release_tag_check_accepts_only_matching_tag(self) -> None:
+        script = ROOT / "scripts/check-release-tag.py"
+        accepted = subprocess.run(
+            [sys.executable, str(script), TAG_VERSION],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        rejected = subprocess.run(
+            [sys.executable, str(script), "v0.1.0-alpha.99"],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        self.assertEqual(accepted.returncode, 0, accepted.stderr)
+        self.assertEqual(rejected.returncode, 1)
+        self.assertIn("does not match package version", rejected.stderr)
 
 
 if __name__ == "__main__":

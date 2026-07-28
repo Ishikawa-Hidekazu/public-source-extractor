@@ -1,6 +1,7 @@
 # Contributing
 
-Thanks for helping improve Public Source Extractor. The project is in source-only alpha, so keep changes small, testable, and inside the documented safety boundary.
+Thanks for helping improve Public Source Extractor. The project is in alpha, so
+keep changes small, testable, and inside the documented safety boundary.
 
 ## Development setup
 
@@ -37,4 +38,3 @@ Network smoke tests must remain separate from the offline suite because `firecra
 - Keep provider raw bodies and private URLs out of fixtures and logs.
 - Update the JSON Schema and changelog when the public contract changes.
 - Confirm `PYTHONPATH=src .venv/bin/python -m unittest discover -s tests -v`, Ruff, and build all pass.
-

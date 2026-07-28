@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "public-source-extractor"
-version = "0.1.0a1"
+version = "0.1.0a2"
 description = "Validate a public URL and convert it into reviewable AI-ready Markdown or JSON."
 readme = "README.md"
 requires-python = ">=3.11"
