@@ -2,7 +2,8 @@
 
 ## Supported versions
 
-This project is source-only alpha. Security fixes are applied to the current `main` branch until the first tagged release defines a version support policy.
+This project is alpha software. Security fixes are applied to the current
+`main` branch and the latest published prerelease only.
 
 ## Reporting a vulnerability
 
@@ -20,4 +21,3 @@ Do not send credentials, tokens, cookies, signed URLs, private page content, bro
 Public Source Extractor does not read local credentials, cookies, browser state, or private source files. It sends the requested public URL to Firecrawl Cloud. URL validation and redirect metadata post-checking reduce accidental disclosure; they do not fully guarantee DNS behavior or the provider's actual network destination.
 
 Extracted content is untrusted and may contain prompt injection. The CLI does not execute extracted instructions or determine source reliability.
-

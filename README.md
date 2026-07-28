@@ -36,44 +36,43 @@ Public Source Extractor is intentionally narrower: one public URL, no credential
 
 Public Source Extractor requires Python 3.11 or newer.
 
-Run the pinned public release without a permanent install:
+Run the published alpha without a permanent install:
 
 ```bash
-uvx --from 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0-alpha.1' public-source-extractor --version
-uvx --from 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0-alpha.1' public-source-extractor https://example.com/
+uvx public-source-extractor --version
+uvx public-source-extractor https://example.com/
 ```
 
-This path requires `uv`, builds from the public Git tag, and does not require a
-PyPI publication. The second command sends `https://example.com/` to Firecrawl
-Cloud; the version command does not perform extraction.
+This path requires `uv` and resolves the published PyPI prerelease. The second
+command sends `https://example.com/` to Firecrawl Cloud; the version command
+does not perform extraction.
 
-From a checked-out source tree:
+Pin the exact package version when reproducibility matters:
 
 ```bash
-python3 -m pip install .
+uvx public-source-extractor@0.1.0a2 --version
 ```
 
-For an isolated command installation:
+Install the prerelease as an isolated command:
 
 ```bash
-pipx install .
-```
-
-Install the source-only alpha from its pinned tag:
-
-```bash
-pipx install 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0-alpha.1'
+pipx install public-source-extractor==0.1.0a2
 ```
 
 Or use pip in an existing Python environment:
 
 ```bash
-python3 -m pip install 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0-alpha.1'
+python3 -m pip install public-source-extractor==0.1.0a2
 ```
 
-The initial source-only alpha is not published to PyPI. A pinned `uvx` source
-run is the current low-friction distribution path while the experimental
-provider boundary remains under observation.
+The public Git tag remains an auditable fallback:
+
+```bash
+uvx --from 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0-alpha.2' public-source-extractor --version
+```
+
+PyPI publication uses GitHub Actions Trusted Publishing with short-lived OIDC
+credentials. No long-lived PyPI API token is stored in this repository.
 
 ## Quick start
 
@@ -197,9 +196,9 @@ See [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md), and [SUPPORT
 
 ## Status
 
-Source-only alpha. Package version `0.1.0a1` maps to tag `v0.1.0-alpha.1`.
-Pinned `uvx` execution from that tag is verified; PyPI publication remains
-deferred. `firecrawl-keyless` is an experimental third-party provider, and no
+Alpha package. Package version `0.1.0a2` maps to tag `v0.1.0-alpha.2`.
+The package is distributed through PyPI and the matching public Git tag.
+`firecrawl-keyless` is an experimental third-party provider, and no
 compatibility or service-availability guarantee is made.
 
 ## License

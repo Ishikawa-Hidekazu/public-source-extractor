@@ -1,8 +1,35 @@
 # Release Checklist
 
-Release authorization for `v0.1.0-alpha.1` was granted after repository and
-release-candidate QA. This file records completed evidence and current
-distribution decisions.
+This file records reusable release checks and evidence for published versions.
+
+## `v0.1.0-alpha.2` candidate
+
+### Contract
+
+- [x] Package version `0.1.0a2` maps to tag `v0.1.0-alpha.2`.
+- [x] README and release notes document the same install commands and safety boundary.
+- [x] Markdown and JSON contracts remain unchanged.
+- [x] `firecrawl-keyless` remains explicitly experimental.
+
+### Distribution
+
+- [x] PyPI project name is unregistered at candidate preparation time.
+- [x] Publish workflow uses the dedicated `pypi` environment and job-level `id-token: write`.
+- [x] No long-lived PyPI API token is referenced.
+- [x] Wheel and sdist are built in the release workflow and checked with Twine.
+- [ ] Configure the pending PyPI Trusted Publisher for the exact repository, workflow, and environment.
+- [ ] Complete one independent pre-publication QA.
+- [ ] Publish the GitHub prerelease and verify the PyPI upload.
+- [ ] Verify anonymous `uvx`, `pipx`, and fresh-venv installs from PyPI.
+
+### Failure policy
+
+- PyPI versions are immutable and are never overwritten.
+- If the upload is unusable, stop, document the failure, yank only when justified,
+  and publish a new version after review.
+- Do not delete or move a public tag as an automatic recovery action.
+
+## `v0.1.0-alpha.1` record
 
 ## Contract
 
@@ -61,5 +88,6 @@ If either publication action fails, stop and report. Do not delete the release, 
 
 - [x] Verified `uvx` execution from the pinned public Git tag.
 - [x] Kept clone, virtual environment, and `pipx` source installation as transparent fallbacks.
-- [x] Kept PyPI publication disabled while the experimental provider boundary and continuity are evaluated.
-- [ ] Reconsider PyPI only after package ownership, trusted publishing, provider continuity, and fresh install/uninstall QA have a separate approved release gate.
+- [x] Kept PyPI publication disabled for the initial source-only alpha.
+- [x] Opened a separate approved gate for package ownership, Trusted Publishing,
+  provider continuity, and fresh install/uninstall QA.

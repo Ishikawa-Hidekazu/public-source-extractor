@@ -33,41 +33,43 @@ Public Source Extractorは、公開URL 1件、credential探索なし、public-on
 
 Python 3.11以上が必要です。
 
-恒久installせず、公開済みtagへ固定して実行する場合:
+恒久installせず、公開済みalphaを実行する場合:
 
 ```bash
-uvx --from 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0-alpha.1' public-source-extractor --version
-uvx --from 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0-alpha.1' public-source-extractor https://example.com/
+uvx public-source-extractor --version
+uvx public-source-extractor https://example.com/
 ```
 
-この経路には`uv`が必要です。公開Git tagからbuildし、PyPI公開は必要ありません。
+この経路には`uv`が必要で、PyPIに公開されたprereleaseを解決します。
 2つ目のcommandは`https://example.com/`をFirecrawl Cloudへ送信します。
 version確認だけでは抽出を行いません。
 
-```bash
-python3 -m pip install .
-```
-
-隔離したcommandとしてinstallする場合:
+再現性のためpackage versionを固定する場合:
 
 ```bash
-pipx install .
+uvx public-source-extractor@0.1.0a2 --version
 ```
 
-初回source-only alphaはPyPIへ公開しません。experimental providerの境界を観測する間は、
-tag固定の`uvx` source実行を低摩擦な配布経路とします。
-
-source-only alphaは、次のようにtagへ固定してinstallできます。
+prereleaseを隔離したcommandとしてinstallする場合:
 
 ```bash
-pipx install 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0-alpha.1'
+pipx install public-source-extractor==0.1.0a2
 ```
+
+既存のPython環境へpipでinstallする場合:
 
 ```bash
-python3 -m pip install 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0-alpha.1'
+python3 -m pip install public-source-extractor==0.1.0a2
 ```
 
-初回alphaではPyPI公開と手作業build artifact添付を行いません。
+監査可能なfallbackとして、公開Git tagからも実行できます。
+
+```bash
+uvx --from 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0-alpha.2' public-source-extractor --version
+```
+
+PyPI公開にはGitHub Actions Trusted Publishingの短期OIDC credentialを使います。
+長期PyPI API tokenをrepositoryへ保存しません。
 
 ## 使い方
 
@@ -150,8 +152,8 @@ network smoke testはoffline test suiteと分離します。
 
 ## Status
 
-source-only alphaです。package version `0.1.0a1` はtag `v0.1.0-alpha.1` に対応します。
-tag固定の`uvx`実行は検証済みで、PyPI公開は保留しています。
+alpha packageです。package version `0.1.0a2` はtag `v0.1.0-alpha.2` に対応します。
+PyPIと対応する公開Git tagから配布します。
 `firecrawl-keyless`の継続性やservice availabilityは保証しません。
 
 ## License
