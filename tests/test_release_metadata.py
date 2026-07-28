@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import re
+import subprocess
+import sys
 import tomllib
 import unittest
 from pathlib import Path
@@ -45,8 +47,32 @@ class ReleaseMetadataTests(unittest.TestCase):
         self.assertIn("id-token: write", workflow)
         self.assertIn("environment:", workflow)
         self.assertIn("name: pypi", workflow)
-        self.assertIn("pypa/gh-action-pypi-publish@release/v1", workflow)
+        self.assertRegex(
+            workflow,
+            re.compile(r"pypa/gh-action-pypi-publish@[0-9a-f]{40}"),
+        )
+        self.assertIn("scripts/check-release-tag.py", workflow)
         self.assertNotRegex(workflow, re.compile(r"PYPI_(?:TOKEN|PASSWORD)|password:"))
+
+    def test_release_tag_check_accepts_only_matching_tag(self) -> None:
+        script = ROOT / "scripts/check-release-tag.py"
+        accepted = subprocess.run(
+            [sys.executable, str(script), TAG_VERSION],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        rejected = subprocess.run(
+            [sys.executable, str(script), "v0.1.0-alpha.99"],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        self.assertEqual(accepted.returncode, 0, accepted.stderr)
+        self.assertEqual(rejected.returncode, 1)
+        self.assertIn("does not match package version", rejected.stderr)
 
 
 if __name__ == "__main__":

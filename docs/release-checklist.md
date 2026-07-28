@@ -16,6 +16,8 @@ This file records reusable release checks and evidence for published versions.
 - [x] PyPI project name is unregistered at candidate preparation time.
 - [x] Publish workflow uses the dedicated `pypi` environment and job-level `id-token: write`.
 - [x] No long-lived PyPI API token is referenced.
+- [x] Release tag and package version are checked before build and upload.
+- [x] The PyPI publishing action is pinned to a full commit SHA.
 - [x] Wheel and sdist are built in the release workflow and checked with Twine.
 - [ ] Configure the pending PyPI Trusted Publisher for the exact repository, workflow, and environment.
 - [ ] Complete one independent pre-publication QA.
