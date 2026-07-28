@@ -2,7 +2,7 @@
 
 This file records reusable release checks and evidence for published versions.
 
-## `v0.1.0-alpha.2` candidate
+## `v0.1.0-alpha.2` - 2026-07-29
 
 ### Contract
 
@@ -19,10 +19,18 @@ This file records reusable release checks and evidence for published versions.
 - [x] Release tag and package version are checked before build and upload.
 - [x] The PyPI publishing action is pinned to a full commit SHA.
 - [x] Wheel and sdist are built in the release workflow and checked with Twine.
-- [ ] Configure the pending PyPI Trusted Publisher for the exact repository, workflow, and environment.
-- [ ] Complete one independent pre-publication QA.
-- [ ] Publish the GitHub prerelease and verify the PyPI upload.
-- [ ] Verify anonymous `uvx`, `pipx`, and fresh-venv installs from PyPI.
+- [x] Configured the pending PyPI Trusted Publisher for the exact repository, workflow, and environment.
+- [x] Completed one independent pre-publication QA.
+- [x] Published the GitHub prerelease and verified the PyPI upload.
+- [x] Verified anonymous `uvx`, isolated `pipx`, and fresh-venv installs from PyPI.
+- [x] Verified live Markdown and JSON extraction from the PyPI package.
+- [x] Validated live JSON output against Output Schema v0.1.
+
+Published references:
+
+- GitHub Release: <https://github.com/Ishikawa-Hidekazu/public-source-extractor/releases/tag/v0.1.0-alpha.2>
+- PyPI: <https://pypi.org/project/public-source-extractor/0.1.0a2/>
+- Trusted Publishing workflow: <https://github.com/Ishikawa-Hidekazu/public-source-extractor/actions/runs/30406424242>
 
 ### Failure policy
 
