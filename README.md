@@ -112,7 +112,16 @@ The output path must have an existing non-symlink parent and must not already ex
 
 ## Real-world use
 
-[This Japanese implementation log](https://taupe.site/entry/public-source-extractor-ai-research-cli/) shows the CLI used to turn selected public sources into reviewable Markdown and JSON artifacts. It also documents the Firecrawl Cloud boundary, untrusted extracted content, and observed provider limits.
+[The repository-hosted GitHub Changelog case study](docs/case-study-github-changelog.md)
+shows a pinned command, a successful public-source extraction, the human review
+step, and the failure boundary without using browser state or local credentials.
+
+[This Japanese implementation log](https://taupe.site/entry/public-source-extractor-ai-research-cli/)
+documents the broader daily workflow, Firecrawl Cloud boundary, untrusted
+extracted content, and observed provider limits.
+
+[Stable 0.1.0 criteria](docs/stable-0.1.0-criteria.md) separate the local CLI
+contract from the experimental provider's availability.
 
 ## CLI contract
 

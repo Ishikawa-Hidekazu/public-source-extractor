@@ -21,6 +21,13 @@ class ReleaseMetadataTests(unittest.TestCase):
         self.assertEqual(pyproject["project"]["version"], PACKAGE_VERSION)
         self.assertEqual(public_source_extractor.__version__, PACKAGE_VERSION)
 
+    def test_package_homepage_points_to_the_product_article(self) -> None:
+        pyproject = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
+        self.assertEqual(
+            pyproject["project"]["urls"]["Homepage"],
+            "https://taupe.site/entry/public-source-extractor-ai-research-cli/",
+        )
+
     def test_tag_mapping_is_documented(self) -> None:
         release_notes = (ROOT / "docs/releases/v0.1.0-alpha.2.md").read_text(
             encoding="utf-8"

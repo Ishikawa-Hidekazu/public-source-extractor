@@ -10,9 +10,13 @@
 
 ## Homepage
 
-Initial: `https://ishikawa.co/`
+Current package candidate:
+`https://taupe.site/entry/public-source-extractor-ai-research-cli/`
 
-Replace with a dedicated explanatory article after publication if it gives users a clearer introduction.
+The dedicated article explains the product, live workflow, provider boundary,
+and failure behavior more directly than the general `ishikawa.co` homepage.
+Changing the GitHub repository setting remains a separate metadata action and
+is not authorized by this document.
 
 ## Topics
 
@@ -29,6 +33,6 @@ Replace with a dedicated explanatory article after publication if it gives users
 
 ## Visibility and release
 
-The repository and `v0.1.0-alpha.1` prerelease are public. This document does
-not authorize a new tag, release, package-registry entry, PyPI project, or
-repository-settings change.
+The repository and `v0.1.0-alpha.2` prerelease are public, and package
+`0.1.0a2` is available from PyPI. This document does not authorize a new tag,
+release, package-registry upload, or repository-settings change.
