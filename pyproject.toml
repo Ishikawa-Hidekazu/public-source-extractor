@@ -20,7 +20,7 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://ishikawa.co/"
+Homepage = "https://taupe.site/entry/public-source-extractor-ai-research-cli/"
 Repository = "https://github.com/Ishikawa-Hidekazu/public-source-extractor"
 Issues = "https://github.com/Ishikawa-Hidekazu/public-source-extractor/issues"
 Changelog = "https://github.com/Ishikawa-Hidekazu/public-source-extractor/blob/main/CHANGELOG.md"

@@ -95,7 +95,16 @@ experimental providerがcreditsを返さない場合、前者は`null`になり�
 
 ## 実運用例
 
-[公開情報をAI調査用artifactへ変換した実装ログ](https://taupe.site/entry/public-source-extractor-ai-research-cli/)では、選んだ公開一次情報をMarkdown / JSONへ変換する実運用、Firecrawl Cloudへの送信境界、untrustedな抽出内容、provider limitの観測をまとめています。
+[GitHub Changelogを使ったrepository内case study](docs/case-study-github-changelog.md)では、
+version固定command、公開sourceの抽出成功、人による元page確認、失敗時の境界を、
+browser stateやlocal credentialなしで再現します。
+
+[公開情報をAI調査用artifactへ変換した実装ログ](https://taupe.site/entry/public-source-extractor-ai-research-cli/)では、
+より広い日常workflow、Firecrawl Cloudへの送信境界、untrustedな抽出内容、
+provider limitの観測をまとめています。
+
+[stable 0.1.0の条件](docs/stable-0.1.0-criteria.md)は、local CLI contractと
+experimental providerのavailabilityを分けて定義します。
 
 ## Exit code
 

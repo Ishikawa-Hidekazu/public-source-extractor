@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Added
+
+- Add a repository-hosted case study for a pinned extraction of one official GitHub Changelog page.
+- Define stable `0.1.0` criteria without promising experimental provider availability.
+
+### Changed
+
+- Point future package metadata to the dedicated implementation article instead of the general author homepage.
+
 ## [0.1.0-alpha.2] - 2026-07-28
 
 ### Added
