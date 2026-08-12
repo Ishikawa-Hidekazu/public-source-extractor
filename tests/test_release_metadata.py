@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import re
 import subprocess
 import sys
@@ -16,6 +17,41 @@ TAG_VERSION = "v0.1.0-alpha.2"
 
 
 class ReleaseMetadataTests(unittest.TestCase):
+    def test_codex_plugin_marketplace_and_manifest_match(self) -> None:
+        marketplace = json.loads(
+            (ROOT / ".agents/plugins/marketplace.json").read_text(encoding="utf-8")
+        )
+        manifest = json.loads(
+            (
+                ROOT
+                / "plugins/public-source-extractor/.codex-plugin/plugin.json"
+            ).read_text(encoding="utf-8")
+        )
+        self.assertEqual(marketplace["name"], "ishikawa-public-tools")
+        self.assertEqual(len(marketplace["plugins"]), 1)
+        entry = marketplace["plugins"][0]
+        self.assertEqual(entry["name"], manifest["name"])
+        self.assertEqual(
+            entry["source"]["path"], "./plugins/public-source-extractor"
+        )
+        self.assertEqual(entry["policy"]["installation"], "AVAILABLE")
+        self.assertEqual(entry["policy"]["authentication"], "ON_INSTALL")
+        self.assertEqual(manifest["skills"], "./skills/")
+        self.assertEqual(
+            manifest["repository"],
+            "https://github.com/Ishikawa-Hidekazu/public-source-extractor",
+        )
+
+    def test_codex_plugin_skill_keeps_the_public_only_boundary(self) -> None:
+        skill = (
+            ROOT
+            / "plugins/public-source-extractor/skills/public-source-extractor/SKILL.md"
+        ).read_text(encoding="utf-8")
+        self.assertIn("Firecrawl Cloud", skill)
+        self.assertIn("untrusted source material", skill)
+        self.assertIn("private, authenticated, signed", skill)
+        self.assertIn("public-source-extractor==0.1.0a2", skill)
+
     def test_python_versions_match(self) -> None:
         pyproject = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
         self.assertEqual(pyproject["project"]["version"], PACKAGE_VERSION)

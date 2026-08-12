@@ -1,0 +1,4 @@
+interface:
+  display_name: "Public Source Extractor"
+  short_description: "Extract public web pages into Markdown or JSON."
+  default_prompt: "Extract this public URL into a reusable research artifact."

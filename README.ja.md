@@ -85,6 +85,17 @@ experimental providerがcreditsを返さない場合、前者は`null`になり�
 
 `--output` は、既存fileとsymlinkを上書きしません。親directoryは事前に作成してください。
 
+## Codex Agent Plugin preview
+
+Codex CLI `0.147.0`以降では、このrepositoryをportable Agent Plugin marketplaceとして追加できます。previewが追加するのは、安全境界を含むskillとstarter promptです。globalなPython package、MCP server、credentialは追加しません。
+
+```bash
+codex plugin marketplace add Ishikawa-Hidekazu/public-source-extractor --ref main
+codex plugin add public-source-extractor@ishikawa-public-tools
+```
+
+skillは、利用可能なら既存の`public-source-extractor` commandを使い、未installなら`uvx`でversion固定のPyPI alphaを実行します。抽出時に選択した公開URLがFirecrawl Cloudへ送られる境界は変わりません。利用前に[Safety boundary](#safety-boundary)を確認してください。
+
 <picture>
   <source media="(max-width: 600px)" srcset="assets/source/terminal-example-mobile.svg">
   <img src="assets/source/terminal-example.svg" alt="example.comのfixtureだけで作ったPublic Source Extractorのterminal例。公開URL 1件のMarkdown変換と、安定したprovider_rate_limited JSON error contractを示しています。">
