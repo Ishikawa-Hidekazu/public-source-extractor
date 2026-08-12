@@ -1,0 +1,28 @@
+{
+  "name": "public-source-extractor",
+  "version": "0.1.0",
+  "description": "Turn public web pages into reusable Markdown or JSON research artifacts.",
+  "author": {
+    "name": "Hidekazu Ishikawa",
+    "url": "https://github.com/Ishikawa-Hidekazu"
+  },
+  "homepage": "https://taupe.site/entry/public-source-extractor-ai-research-cli/",
+  "repository": "https://github.com/Ishikawa-Hidekazu/public-source-extractor",
+  "license": "MIT",
+  "keywords": ["research", "web-extraction", "markdown", "json"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Public Source Extractor",
+    "shortDescription": "Extract public pages into Markdown or JSON.",
+    "longDescription": "Create source-backed research artifacts from public URLs while rejecting private, authenticated, and signed URLs.",
+    "developerName": "Hidekazu Ishikawa",
+    "category": "Developer Tools",
+    "capabilities": ["Read"],
+    "websiteURL": "https://taupe.site/entry/public-source-extractor-ai-research-cli/",
+    "defaultPrompt": [
+      "Extract this public URL as Markdown.",
+      "Extract this public URL as structured JSON.",
+      "Turn this public source into a reusable research artifact."
+    ]
+  }
+}

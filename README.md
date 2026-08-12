@@ -102,6 +102,17 @@ public-source-extractor https://example.com/ --output report.md
 
 The output path must have an existing non-symlink parent and must not already exist.
 
+## Codex Agent Plugin preview
+
+Codex CLI `0.147.0` or newer can load this repository as a portable Agent Plugin marketplace. This preview adds a safety-focused skill and starter prompts; it does not install a global Python package, add an MCP server, or store credentials.
+
+```bash
+codex plugin marketplace add Ishikawa-Hidekazu/public-source-extractor --ref main
+codex plugin add public-source-extractor@ishikawa-public-tools
+```
+
+The skill uses an existing `public-source-extractor` command when available and otherwise runs the pinned PyPI alpha through `uvx`. Extraction still sends the selected public URL to Firecrawl Cloud. Review the [Safety boundary](#safety-boundary) before use.
+
 <picture>
   <source media="(max-width: 600px)" srcset="assets/source/terminal-example-mobile.svg">
   <img src="assets/source/terminal-example.svg" alt="Fixture-only Public Source Extractor terminal example showing one public example.com URL converted to Markdown, followed by the stable provider_rate_limited JSON error contract.">

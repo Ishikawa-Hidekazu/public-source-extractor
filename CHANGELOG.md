@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 - Add a repository-hosted case study for a pinned extraction of one official GitHub Changelog page.
 - Define stable `0.1.0` criteria without promising experimental provider availability.
+- Add a portable Codex Agent Plugin preview with a public-only extraction skill and repository marketplace.
 
 ### Changed
 
