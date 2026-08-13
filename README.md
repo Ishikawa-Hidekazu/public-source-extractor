@@ -36,39 +36,39 @@ Public Source Extractor is intentionally narrower: one public URL, no credential
 
 Public Source Extractor requires Python 3.11 or newer.
 
-Run the published alpha without a permanent install:
+Run the stable package without a permanent install:
 
 ```bash
 uvx public-source-extractor --version
 uvx public-source-extractor https://example.com/
 ```
 
-This path requires `uv` and resolves the published PyPI prerelease. The second
+This path requires `uv` and resolves the published PyPI release. The second
 command sends `https://example.com/` to Firecrawl Cloud; the version command
 does not perform extraction.
 
 Pin the exact package version when reproducibility matters:
 
 ```bash
-uvx public-source-extractor@0.1.0a2 --version
+uvx public-source-extractor@0.1.0 --version
 ```
 
-Install the prerelease as an isolated command:
+Install the stable release as an isolated command:
 
 ```bash
-pipx install public-source-extractor==0.1.0a2
+pipx install public-source-extractor==0.1.0
 ```
 
 Or use pip in an existing Python environment:
 
 ```bash
-python3 -m pip install public-source-extractor==0.1.0a2
+python3 -m pip install public-source-extractor==0.1.0
 ```
 
 The public Git tag remains an auditable fallback:
 
 ```bash
-uvx --from 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0-alpha.2' public-source-extractor --version
+uvx --from 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0' public-source-extractor --version
 ```
 
 PyPI publication uses GitHub Actions Trusted Publishing with short-lived OIDC
@@ -111,7 +111,7 @@ codex plugin marketplace add Ishikawa-Hidekazu/public-source-extractor --ref mai
 codex plugin add public-source-extractor@ishikawa-public-tools
 ```
 
-The skill uses an existing `public-source-extractor` command when available and otherwise runs the pinned PyPI alpha through `uvx`. Extraction still sends the selected public URL to Firecrawl Cloud. Review the [Safety boundary](#safety-boundary) before use.
+The skill uses an existing `public-source-extractor` command when available and otherwise runs the pinned stable PyPI package through `uvx`. Extraction still sends the selected public URL to Firecrawl Cloud. Review the [Safety boundary](#safety-boundary) before use.
 
 <picture>
   <source media="(max-width: 600px)" srcset="assets/source/terminal-example-mobile.svg">
@@ -216,7 +216,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md), and [SUPPORT
 
 ## Status
 
-Alpha package. Package version `0.1.0a2` maps to tag `v0.1.0-alpha.2`.
+Stable CLI contract. Package version `0.1.0` maps to tag `v0.1.0`.
 The package is distributed through PyPI and the matching public Git tag.
 `firecrawl-keyless` is an experimental third-party provider, and no
 compatibility or service-availability guarantee is made.

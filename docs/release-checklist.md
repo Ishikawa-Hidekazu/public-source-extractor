@@ -2,11 +2,13 @@
 
 This file records reusable release checks and evidence for published versions.
 
-## `v0.1.0` candidate - unreleased
+## `v0.1.0` candidate - 2026-08-14
 
-- [ ] Meet every item in [`stable-0.1.0-criteria.md`](stable-0.1.0-criteria.md).
-- [ ] Confirm the GitHub Changelog case study from a disposable environment.
-- [ ] Confirm README, package metadata, changelog, version, tag, and release notes agree.
+- [x] Meet the local contract, safety, provider-boundary, distribution-preparation,
+  and offline evidence items in [`stable-0.1.0-criteria.md`](stable-0.1.0-criteria.md).
+- [x] Confirm the GitHub Changelog case study from a disposable environment using
+  the locally built `0.1.0` candidate.
+- [x] Confirm README, package metadata, changelog, version, tag, and release notes agree.
 - [ ] Complete one independent release-state QA.
 - [ ] Obtain the explicit tag / GitHub Release / PyPI publication gate.
 

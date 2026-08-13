@@ -24,10 +24,10 @@ public-source-extractor "https://example.com/"
 public-source-extractor "https://example.com/" --mode json --pretty
 ```
 
-When the command is unavailable, use the published alpha without a global install:
+When the command is unavailable, use the pinned stable package without a global install:
 
 ```bash
-uvx --from public-source-extractor==0.1.0a2 public-source-extractor "https://example.com/"
+uvx --from public-source-extractor==0.1.0 public-source-extractor "https://example.com/"
 ```
 
 Use Markdown for reading and note-taking. Use JSON when the output will be validated, compared, or passed to another tool.

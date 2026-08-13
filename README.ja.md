@@ -33,39 +33,39 @@ Public Source Extractorは、公開URL 1件、credential探索なし、public-on
 
 Python 3.11以上が必要です。
 
-恒久installせず、公開済みalphaを実行する場合:
+恒久installせず、stable packageを実行する場合:
 
 ```bash
 uvx public-source-extractor --version
 uvx public-source-extractor https://example.com/
 ```
 
-この経路には`uv`が必要で、PyPIに公開されたprereleaseを解決します。
+この経路には`uv`が必要で、PyPIに公開されたstable releaseを解決します。
 2つ目のcommandは`https://example.com/`をFirecrawl Cloudへ送信します。
 version確認だけでは抽出を行いません。
 
 再現性のためpackage versionを固定する場合:
 
 ```bash
-uvx public-source-extractor@0.1.0a2 --version
+uvx public-source-extractor@0.1.0 --version
 ```
 
-prereleaseを隔離したcommandとしてinstallする場合:
+stable releaseを隔離したcommandとしてinstallする場合:
 
 ```bash
-pipx install public-source-extractor==0.1.0a2
+pipx install public-source-extractor==0.1.0
 ```
 
 既存のPython環境へpipでinstallする場合:
 
 ```bash
-python3 -m pip install public-source-extractor==0.1.0a2
+python3 -m pip install public-source-extractor==0.1.0
 ```
 
 監査可能なfallbackとして、公開Git tagからも実行できます。
 
 ```bash
-uvx --from 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0-alpha.2' public-source-extractor --version
+uvx --from 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0' public-source-extractor --version
 ```
 
 PyPI公開にはGitHub Actions Trusted Publishingの短期OIDC credentialを使います。
@@ -94,7 +94,7 @@ codex plugin marketplace add Ishikawa-Hidekazu/public-source-extractor --ref mai
 codex plugin add public-source-extractor@ishikawa-public-tools
 ```
 
-skillは、利用可能なら既存の`public-source-extractor` commandを使い、未installなら`uvx`でversion固定のPyPI alphaを実行します。抽出時に選択した公開URLがFirecrawl Cloudへ送られる境界は変わりません。利用前に[Safety boundary](#safety-boundary)を確認してください。
+skillは、利用可能なら既存の`public-source-extractor` commandを使い、未installなら`uvx`でversion固定のstable PyPI packageを実行します。抽出時に選択した公開URLがFirecrawl Cloudへ送られる境界は変わりません。利用前に[Safety boundary](#safety-boundary)を確認してください。
 
 <picture>
   <source media="(max-width: 600px)" srcset="assets/source/terminal-example-mobile.svg">
@@ -172,7 +172,7 @@ network smoke testはoffline test suiteと分離します。
 
 ## Status
 
-alpha packageです。package version `0.1.0a2` はtag `v0.1.0-alpha.2` に対応します。
+local CLI contractのstable releaseです。package version `0.1.0` はtag `v0.1.0` に対応します。
 PyPIと対応する公開Git tagから配布します。
 `firecrawl-keyless`の継続性やservice availabilityは保証しません。
 

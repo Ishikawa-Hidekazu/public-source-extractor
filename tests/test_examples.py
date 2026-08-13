@@ -28,7 +28,7 @@ class PublicExampleTests(unittest.TestCase):
         case_study = (ROOT / "docs/case-study-github-changelog.md").read_text(
             encoding="utf-8"
         )
-        self.assertIn("public-source-extractor@0.1.0a2", case_study)
+        self.assertIn("public-source-extractor@0.1.0", case_study)
         self.assertIn("github.blog/changelog/", case_study)
         self.assertIn("experimental_provider", case_study)
         self.assertIn("Human Review", case_study)

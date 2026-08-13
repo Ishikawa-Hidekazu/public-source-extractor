@@ -12,8 +12,8 @@ import public_source_extractor
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_VERSION = "0.1.0a2"
-TAG_VERSION = "v0.1.0-alpha.2"
+PACKAGE_VERSION = "0.1.0"
+TAG_VERSION = "v0.1.0"
 
 
 class ReleaseMetadataTests(unittest.TestCase):
@@ -50,7 +50,7 @@ class ReleaseMetadataTests(unittest.TestCase):
         self.assertIn("Firecrawl Cloud", skill)
         self.assertIn("untrusted source material", skill)
         self.assertIn("private, authenticated, signed", skill)
-        self.assertIn("public-source-extractor==0.1.0a2", skill)
+        self.assertIn("public-source-extractor==0.1.0", skill)
 
     def test_python_versions_match(self) -> None:
         pyproject = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
@@ -65,7 +65,7 @@ class ReleaseMetadataTests(unittest.TestCase):
         )
 
     def test_tag_mapping_is_documented(self) -> None:
-        release_notes = (ROOT / "docs/releases/v0.1.0-alpha.2.md").read_text(
+        release_notes = (ROOT / "docs/releases/v0.1.0.md").read_text(
             encoding="utf-8"
         )
         self.assertIn(PACKAGE_VERSION, release_notes)

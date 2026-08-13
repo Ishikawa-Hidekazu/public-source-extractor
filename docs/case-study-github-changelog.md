@@ -19,10 +19,10 @@ The URL is sent to Firecrawl Cloud through the experimental
 
 ## Reproduce The Extraction
 
-Pin the published alpha so the package version is explicit:
+Pin the stable package so the package version is explicit:
 
 ```bash
-uvx public-source-extractor@0.1.0a2 \
+uvx public-source-extractor@0.1.0 \
   'https://github.blog/changelog/2026-08-11-per-model-token-breakdown-in-the-usage-report/' \
   --mode json --pretty > report.json
 ```
