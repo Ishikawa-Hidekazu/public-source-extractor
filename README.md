@@ -226,8 +226,9 @@ See [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md), and [SUPPORT
 
 ## Status
 
-Stable CLI contract. Package version `0.1.0` maps to tag `v0.1.0`.
-The package is distributed through PyPI and the matching public Git tag.
+Stable `0.1.0` is a release candidate. The latest verified public distribution
+remains package `0.1.0a2` and tag `v0.1.0-alpha.2` until the explicit release
+gate completes.
 `firecrawl-keyless` is an experimental third-party provider, and no
 compatibility or service-availability guarantee is made.
 

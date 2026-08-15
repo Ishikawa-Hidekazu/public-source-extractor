@@ -180,8 +180,8 @@ network smoke testはoffline test suiteと分離します。
 
 ## Status
 
-local CLI contractのstable releaseです。package version `0.1.0` はtag `v0.1.0` に対応します。
-PyPIと対応する公開Git tagから配布します。
+stable `0.1.0`はrelease candidateです。明示的なrelease gateが完了するまでは、
+公開確認済みのpackage `0.1.0a2`とtag `v0.1.0-alpha.2`が最新です。
 `firecrawl-keyless`の継続性やservice availabilityは保証しません。
 
 ## License
