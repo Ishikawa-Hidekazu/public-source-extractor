@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for helping improve Public Source Extractor. The project is in alpha, so
+Thanks for helping improve Public Source Extractor. The project is pre-1.0, so
 keep changes small, testable, and inside the documented safety boundary.
 
 ## Development setup

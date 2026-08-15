@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "public-source-extractor"
 version = "0.1.0"
 description = "Validate a public URL and convert it into reviewable AI-ready Markdown or JSON."
-readme = "README.md"
+readme = {file = "docs/pypi-readme.md", content-type = "text/markdown"}
 requires-python = ">=3.11"
 license = "MIT"
 authors = [{name = "Ishikawa Hidekazu"}]

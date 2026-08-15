@@ -7,6 +7,12 @@
 > [!IMPORTANT]
 > The requested public URL is sent to **Firecrawl Cloud** for extraction. The `firecrawl-keyless` provider is experimental: availability, anonymous REST access, credit limits, and long-term continuity are not guaranteed.
 
+> [!NOTE]
+> Stable `0.1.0` is a release candidate and is not published yet. Until its
+> explicit release gate completes, use the published `0.1.0a2` prerelease shown
+> below. The README will switch to stable install commands only after the tag,
+> GitHub Release, and PyPI package are publicly verified.
+
 `public-source-extractor` is a public-URL intake guardrail for AI research
 workflows. It validates one public HTTP or HTTPS URL, sends that URL to the
 experimental provider, and returns reviewable Markdown or a stable JSON
@@ -36,39 +42,39 @@ Public Source Extractor is intentionally narrower: one public URL, no credential
 
 Public Source Extractor requires Python 3.11 or newer.
 
-Run the stable package without a permanent install:
+Run the currently published prerelease without a permanent install:
 
 ```bash
-uvx public-source-extractor --version
-uvx public-source-extractor https://example.com/
+uvx public-source-extractor@0.1.0a2 --version
+uvx public-source-extractor@0.1.0a2 https://example.com/
 ```
 
-This path requires `uv` and resolves the published PyPI release. The second
+This path requires `uv` and resolves the published PyPI prerelease. The second
 command sends `https://example.com/` to Firecrawl Cloud; the version command
 does not perform extraction.
 
 Pin the exact package version when reproducibility matters:
 
 ```bash
-uvx public-source-extractor@0.1.0 --version
+uvx public-source-extractor@0.1.0a2 --version
 ```
 
-Install the stable release as an isolated command:
+Install the published prerelease as an isolated command:
 
 ```bash
-pipx install public-source-extractor==0.1.0
+pipx install public-source-extractor==0.1.0a2
 ```
 
 Or use pip in an existing Python environment:
 
 ```bash
-python3 -m pip install public-source-extractor==0.1.0
+python3 -m pip install public-source-extractor==0.1.0a2
 ```
 
 The public Git tag remains an auditable fallback:
 
 ```bash
-uvx --from 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0' public-source-extractor --version
+uvx --from 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0-alpha.2' public-source-extractor --version
 ```
 
 PyPI publication uses GitHub Actions Trusted Publishing with short-lived OIDC
@@ -111,7 +117,11 @@ codex plugin marketplace add Ishikawa-Hidekazu/public-source-extractor --ref mai
 codex plugin add public-source-extractor@ishikawa-public-tools
 ```
 
-The skill uses an existing `public-source-extractor` command when available and otherwise runs the pinned stable PyPI package through `uvx`. Extraction still sends the selected public URL to Firecrawl Cloud. Review the [Safety boundary](#safety-boundary) before use.
+The skill uses an existing `public-source-extractor` command when available and
+otherwise runs the latest verified published package through `uvx`. Until
+stable `0.1.0` is public, that fallback remains `0.1.0a2`. Extraction still
+sends the selected public URL to Firecrawl Cloud. Review the
+[Safety boundary](#safety-boundary) before use.
 
 <picture>
   <source media="(max-width: 600px)" srcset="assets/source/terminal-example-mobile.svg">
