@@ -2,8 +2,8 @@
 
 ## Supported versions
 
-This project is alpha software. Security fixes are applied to the current
-`main` branch and the latest published prerelease only.
+This project is pre-1.0 software. Security fixes are applied to the current
+`main` branch and the latest published release only.
 
 ## Reporting a vulnerability
 

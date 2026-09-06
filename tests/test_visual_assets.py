@@ -36,6 +36,11 @@ class VisualAssetTests(unittest.TestCase):
         self.assertIn("https://example.com/", combined)
         self.assertNotRegex(combined, re.compile(r"/Users/|auth\.json|ghp_|sk-|Bearer "))
 
+    def test_social_preview_uses_current_pre_1_0_label(self) -> None:
+        source = (ROOT / "assets/source/social-preview.svg").read_text(encoding="utf-8")
+        self.assertIn("PRE-1.0 • PUBLIC-ONLY", source)
+        self.assertNotIn("SOURCE-ONLY ALPHA", source)
+
     def test_readmes_reference_visual_and_alt_text(self) -> None:
         for name in ("README.md", "README.ja.md"):
             content = (ROOT / name).read_text(encoding="utf-8")

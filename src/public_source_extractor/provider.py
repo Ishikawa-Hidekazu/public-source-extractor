@@ -8,6 +8,7 @@ import urllib.request
 from dataclasses import dataclass
 from typing import Any, Protocol
 
+from . import __version__
 from .errors import (
     InputRejected,
     InvalidProviderResponse,
@@ -74,7 +75,7 @@ class FirecrawlKeylessProvider:
             data=body,
             headers={
                 "Content-Type": "application/json",
-                "User-Agent": "public-source-extractor/0.1.0-alpha.1",
+                "User-Agent": f"public-source-extractor/{__version__}",
             },
             method="POST",
         )

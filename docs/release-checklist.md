@@ -2,13 +2,21 @@
 
 This file records reusable release checks and evidence for published versions.
 
-## `v0.1.0` candidate - unreleased
+## `v0.1.0` candidate - 2026-08-14
 
-- [ ] Meet every item in [`stable-0.1.0-criteria.md`](stable-0.1.0-criteria.md).
-- [ ] Confirm the GitHub Changelog case study from a disposable environment.
-- [ ] Confirm README, package metadata, changelog, version, tag, and release notes agree.
+- [x] Meet the local contract, safety, provider-boundary, distribution-preparation,
+  and offline evidence items in [`stable-0.1.0-criteria.md`](stable-0.1.0-criteria.md).
+- [x] Confirm the GitHub Changelog case study from a disposable environment using
+  the locally built `0.1.0` candidate.
+- [x] Keep the public repository README, plugin fallback, and case study on the
+  verified `0.1.0a2` distribution until stable publication succeeds.
+- [x] Use a package-index README that accurately describes `0.1.0` only when it
+  is rendered from the uploaded `0.1.0` package metadata.
 - [ ] Complete one independent release-state QA.
 - [ ] Obtain the explicit tag / GitHub Release / PyPI publication gate.
+- [ ] After the tag, GitHub Release, PyPI upload, and anonymous installs are
+  verified, merge a separate docs-only PR that switches repository install and
+  plugin fallback examples from `0.1.0a2` to `0.1.0`.
 
 ## `v0.1.0-alpha.2` - 2026-07-29
 

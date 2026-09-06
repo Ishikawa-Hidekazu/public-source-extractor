@@ -16,5 +16,5 @@
 
   <text x="72" y="544" fill="#c2cdd4" font-family="Arial, sans-serif" font-size="27" font-weight="600">Firecrawl Cloud • Experimental Keyless • Untrusted output</text>
   <rect x="926" y="510" width="282" height="48" rx="6" fill="#173126" stroke="#67d391" stroke-width="2"/>
-  <text x="1067" y="543" fill="#7ce2a2" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700">SOURCE-ONLY ALPHA</text>
+  <text x="1067" y="543" fill="#7ce2a2" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700">PRE-1.0 • PUBLIC-ONLY</text>
 </svg>

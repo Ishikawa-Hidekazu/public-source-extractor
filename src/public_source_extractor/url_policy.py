@@ -43,6 +43,7 @@ DENIED_QUERY_NAMES = {
     "secret",
     "session",
     "sessionid",
+    "sig",
     "token",
 }
 

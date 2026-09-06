@@ -12,8 +12,8 @@ import public_source_extractor
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_VERSION = "0.1.0a2"
-TAG_VERSION = "v0.1.0-alpha.2"
+PACKAGE_VERSION = "0.1.0"
+TAG_VERSION = "v0.1.0"
 
 
 class ReleaseMetadataTests(unittest.TestCase):
@@ -51,6 +51,7 @@ class ReleaseMetadataTests(unittest.TestCase):
         self.assertIn("untrusted source material", skill)
         self.assertIn("private, authenticated, signed", skill)
         self.assertIn("public-source-extractor==0.1.0a2", skill)
+        self.assertIn("Until stable `0.1.0` is publicly verified", skill)
 
     def test_python_versions_match(self) -> None:
         pyproject = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
@@ -65,7 +66,7 @@ class ReleaseMetadataTests(unittest.TestCase):
         )
 
     def test_tag_mapping_is_documented(self) -> None:
-        release_notes = (ROOT / "docs/releases/v0.1.0-alpha.2.md").read_text(
+        release_notes = (ROOT / "docs/releases/v0.1.0.md").read_text(
             encoding="utf-8"
         )
         self.assertIn(PACKAGE_VERSION, release_notes)
@@ -73,15 +74,20 @@ class ReleaseMetadataTests(unittest.TestCase):
         self.assertNotIn("release candidate", release_notes.lower())
         self.assertNotIn("tag candidate", release_notes.lower())
 
-    def test_readme_install_identifies_package_and_tag_versions(self) -> None:
+    def test_repository_readme_keeps_verified_distribution_until_release(self) -> None:
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        tag_pattern = re.escape(f"public-source-extractor.git@{TAG_VERSION}")
+        self.assertIn("public-source-extractor@0.1.0a2", readme)
+        self.assertIn("public-source-extractor.git@v0.1.0-alpha.2", readme)
+        self.assertIn("release candidate and is not published yet", readme)
+
+    def test_package_index_readme_identifies_stable_package_version(self) -> None:
+        pyproject = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
+        readme_config = pyproject["project"]["readme"]
+        self.assertEqual(readme_config["file"], "docs/pypi-readme.md")
+        pypi_readme = (ROOT / readme_config["file"]).read_text(encoding="utf-8")
         package_pattern = re.escape(f"public-source-extractor@{PACKAGE_VERSION}")
-        self.assertGreaterEqual(len(re.findall(tag_pattern, readme)), 1)
-        self.assertGreaterEqual(len(re.findall(package_pattern, readme)), 1)
-        self.assertNotIn("release candidate", readme.lower())
-        self.assertNotIn("tag does not exist", readme.lower())
-        self.assertNotIn("after the approved", readme.lower())
+        self.assertGreaterEqual(len(re.findall(package_pattern, pypi_readme)), 1)
+        self.assertIn(f"public-source-extractor=={PACKAGE_VERSION}", pypi_readme)
 
     def test_pypi_publish_workflow_uses_trusted_publishing(self) -> None:
         workflow = (ROOT / ".github/workflows/publish-pypi.yml").read_text(

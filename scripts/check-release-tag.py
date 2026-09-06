@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify that a GitHub release tag matches the Python package prerelease."""
+"""Verify that a GitHub release tag matches the Python package version."""
 
 from __future__ import annotations
 
@@ -13,9 +13,13 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def expected_tag(package_version: str) -> str:
+    stable = re.fullmatch(r"\d+\.\d+\.\d+", package_version)
+    if stable is not None:
+        return f"v{package_version}"
+
     match = re.fullmatch(r"(\d+\.\d+\.\d+)a(\d+)", package_version)
     if match is None:
-        raise ValueError(f"unsupported package prerelease version: {package_version}")
+        raise ValueError(f"unsupported package version: {package_version}")
     return f"v{match.group(1)}-alpha.{match.group(2)}"
 
 

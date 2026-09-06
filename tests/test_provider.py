@@ -6,6 +6,7 @@ import socket
 import unittest
 from unittest.mock import patch
 
+from public_source_extractor import __version__
 from public_source_extractor.errors import (
     InvalidProviderResponse,
     ProviderFailure,
@@ -52,6 +53,19 @@ class ProviderTests(unittest.TestCase):
             result = self.provider.extract("https://example.com/", "markdown", 10)
         self.assertEqual(result.content, "# Example")
         self.assertEqual(result.resolved_url, "https://www.example.com/")
+
+    def test_user_agent_matches_package_version(self) -> None:
+        fixture = {
+            "success": True,
+            "data": {"markdown": "# Example", "metadata": {}},
+        }
+        with patch("urllib.request.urlopen", return_value=FakeResponse(fixture)) as opened:
+            self.provider.extract("https://example.com/", "markdown", 10)
+        request = opened.call_args.args[0]
+        self.assertEqual(
+            request.get_header("User-agent"),
+            f"public-source-extractor/{__version__}",
+        )
 
     def test_rejects_private_redirect_metadata(self) -> None:
         fixture = {

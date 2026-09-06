@@ -34,5 +34,6 @@ is not authorized by this document.
 ## Visibility and release
 
 The repository and `v0.1.0-alpha.2` prerelease are public, and package
-`0.1.0a2` is available from PyPI. This document does not authorize a new tag,
-release, package-registry upload, or repository-settings change.
+`0.1.0a2` is available from PyPI. Stable `v0.1.0` is prepared but remains
+unpublished until the explicit release gate. This document does not authorize a
+new tag, release, package-registry upload, or repository-settings change.

@@ -48,6 +48,14 @@ class UrlPolicyTests(unittest.TestCase):
             with self.subTest(name=name):
                 self.assert_rejected(f"https://example.com/?{name}=value")
 
+    def test_rejects_generic_and_azure_sas_signatures(self) -> None:
+        self.assert_rejected("https://example.com/file?sig=value")
+        self.assert_rejected(
+            "https://example.com/file?sp=r&st=2026-08-15T00%3A00%3A00Z"
+            "&se=2026-08-16T00%3A00%3A00Z&spr=https&sv=2024-11-04"
+            "&sr=b&sig=value"
+        )
+
     def test_allows_normal_compound_query_names(self) -> None:
         for name in ("product_code", "article_id", "page_number", "source_type"):
             with self.subTest(name=name):

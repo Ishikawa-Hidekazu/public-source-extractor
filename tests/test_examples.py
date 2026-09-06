@@ -29,6 +29,7 @@ class PublicExampleTests(unittest.TestCase):
             encoding="utf-8"
         )
         self.assertIn("public-source-extractor@0.1.0a2", case_study)
+        self.assertIn("until stable `0.1.0` is publicly verified", case_study)
         self.assertIn("github.blog/changelog/", case_study)
         self.assertIn("experimental_provider", case_study)
         self.assertIn("Human Review", case_study)

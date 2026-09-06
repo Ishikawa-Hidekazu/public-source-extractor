@@ -19,7 +19,8 @@ The URL is sent to Firecrawl Cloud through the experimental
 
 ## Reproduce The Extraction
 
-Pin the published alpha so the package version is explicit:
+Pin the latest verified published package so the package version is explicit.
+This case study remains on `0.1.0a2` until stable `0.1.0` is publicly verified:
 
 ```bash
 uvx public-source-extractor@0.1.0a2 \
