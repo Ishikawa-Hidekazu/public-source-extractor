@@ -2,7 +2,7 @@
 
 This file records reusable release checks and evidence for published versions.
 
-## `v0.1.0` candidate - 2026-08-14
+## `v0.1.0` - 2026-09-07
 
 - [x] Meet the local contract, safety, provider-boundary, distribution-preparation,
   and offline evidence items in [`stable-0.1.0-criteria.md`](stable-0.1.0-criteria.md).
@@ -12,9 +12,9 @@ This file records reusable release checks and evidence for published versions.
   verified `0.1.0a2` distribution until stable publication succeeds.
 - [x] Use a package-index README that accurately describes `0.1.0` only when it
   is rendered from the uploaded `0.1.0` package metadata.
-- [ ] Complete one independent release-state QA.
-- [ ] Obtain the explicit tag / GitHub Release / PyPI publication gate.
-- [ ] After the tag, GitHub Release, PyPI upload, and anonymous installs are
+- [x] Complete one independent release-state QA.
+- [x] Obtain the explicit tag / GitHub Release / PyPI publication gate.
+- [x] After the tag, GitHub Release, PyPI upload, and anonymous installs are
   verified, merge a separate docs-only PR that switches repository install and
   plugin fallback examples from `0.1.0a2` to `0.1.0`.
 
