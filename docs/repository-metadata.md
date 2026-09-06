@@ -10,7 +10,7 @@
 
 ## Homepage
 
-Current package candidate:
+Current package homepage:
 `https://taupe.site/entry/public-source-extractor-ai-research-cli/`
 
 The dedicated article explains the product, live workflow, provider boundary,
@@ -33,7 +33,7 @@ is not authorized by this document.
 
 ## Visibility and release
 
-The repository and `v0.1.0-alpha.2` prerelease are public, and package
-`0.1.0a2` is available from PyPI. Stable `v0.1.0` is prepared but remains
-unpublished until the explicit release gate. This document does not authorize a
-new tag, release, package-registry upload, or repository-settings change.
+The repository, stable `v0.1.0` GitHub Release, and package `0.1.0` on PyPI are
+public. Publication uses GitHub Actions Trusted Publishing. This document does
+not authorize a new tag, release, package-registry upload, or
+repository-settings change.

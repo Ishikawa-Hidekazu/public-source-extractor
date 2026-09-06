@@ -6,9 +6,8 @@
 > 入力した公開URLは、抽出のため **Firecrawl Cloud** へ送信されます。`firecrawl-keyless` providerはexperimentalです。利用可能性、匿名REST access、credit上限、長期継続は保証されません。
 
 > [!NOTE]
-> stable `0.1.0`はrelease candidateで、まだ公開されていません。明示的な
-> release gateが完了するまでは、以下の公開済み`0.1.0a2` prereleaseを使います。
-> tag、GitHub Release、PyPI packageの公開確認後にstable install手順へ切り替えます。
+> stable `0.1.0`はPyPIと対応するGitHub Releaseで公開済みです。
+> 再現性が必要な場合は、以下のversionを固定して使います。
 
 `public-source-extractor` は、AI調査workflowへ公開URLを渡す前の小さな
 intake guardrailです。1件の公開HTTP/HTTPS URLを検証し、experimental
@@ -38,39 +37,39 @@ Public Source Extractorは、公開URL 1件、credential探索なし、public-on
 
 Python 3.11以上が必要です。
 
-恒久installせず、現在公開済みのprereleaseを実行する場合:
+恒久installせず、stable releaseを実行する場合:
 
 ```bash
-uvx public-source-extractor@0.1.0a2 --version
-uvx public-source-extractor@0.1.0a2 https://example.com/
+uvx public-source-extractor@0.1.0 --version
+uvx public-source-extractor@0.1.0 https://example.com/
 ```
 
-この経路には`uv`が必要で、PyPIに公開されたprereleaseを解決します。
+この経路には`uv`が必要で、PyPIに公開されたstable releaseを解決します。
 2つ目のcommandは`https://example.com/`をFirecrawl Cloudへ送信します。
 version確認だけでは抽出を行いません。
 
 再現性のためpackage versionを固定する場合:
 
 ```bash
-uvx public-source-extractor@0.1.0a2 --version
+uvx public-source-extractor@0.1.0 --version
 ```
 
-公開済みprereleaseを隔離したcommandとしてinstallする場合:
+stable releaseを隔離したcommandとしてinstallする場合:
 
 ```bash
-pipx install public-source-extractor==0.1.0a2
+pipx install public-source-extractor==0.1.0
 ```
 
 既存のPython環境へpipでinstallする場合:
 
 ```bash
-python3 -m pip install public-source-extractor==0.1.0a2
+python3 -m pip install public-source-extractor==0.1.0
 ```
 
 監査可能なfallbackとして、公開Git tagからも実行できます。
 
 ```bash
-uvx --from 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0-alpha.2' public-source-extractor --version
+uvx --from 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0' public-source-extractor --version
 ```
 
 PyPI公開にはGitHub Actions Trusted Publishingの短期OIDC credentialを使います。
@@ -100,8 +99,7 @@ codex plugin add public-source-extractor@ishikawa-public-tools
 ```
 
 skillは、利用可能なら既存の`public-source-extractor` commandを使い、未installなら
-`uvx`で公開確認済みのpackageを実行します。stable `0.1.0`の公開確認までは
-`0.1.0a2`へ固定します。抽出時に選択した公開URLがFirecrawl Cloudへ送られる境界は
+`uvx`で公開確認済みのstable `0.1.0` packageを実行します。抽出時に選択した公開URLがFirecrawl Cloudへ送られる境界は
 変わりません。利用前に[Safety boundary](#safety-boundary)を確認してください。
 
 <picture>
@@ -180,8 +178,7 @@ network smoke testはoffline test suiteと分離します。
 
 ## Status
 
-stable `0.1.0`はrelease candidateです。明示的なrelease gateが完了するまでは、
-公開確認済みのpackage `0.1.0a2`とtag `v0.1.0-alpha.2`が最新です。
+stable `0.1.0`はpackage `0.1.0`とtag `v0.1.0`で公開済みです。
 `firecrawl-keyless`の継続性やservice availabilityは保証しません。
 
 ## License
