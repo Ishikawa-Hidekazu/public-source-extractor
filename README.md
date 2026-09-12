@@ -227,6 +227,14 @@ Stable `0.1.0` is available as package `0.1.0` and tag `v0.1.0`.
 `firecrawl-keyless` is an experimental third-party provider, and no
 compatibility or service-availability guarantee is made.
 
+## Built by Ishikawa Hidekazu
+
+public-source-extractor is built and maintained by [Ishikawa Hidekazu](https://ishikawa.co/en/about/) as part of a small collection of reviewable tools for safer AI operations.
+
+- [QuotaTempo](https://github.com/Ishikawa-Hidekazu/quota-tempo) - plan weekly Codex and Claude capacity from a native macOS menu-bar app
+- [codex-healthkit](https://github.com/Ishikawa-Hidekazu/codex-healthkit) - create metadata-only local health reports for Codex installations
+- [Explore all public projects](https://ishikawa.co/en/projects/)
+
 ## License
 
 MIT. See [LICENSE](LICENSE).
