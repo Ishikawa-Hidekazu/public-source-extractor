@@ -95,6 +95,17 @@ JSON to stdout:
 public-source-extractor https://example.com/ --mode json --pretty
 ```
 
+Inspect the source metadata and inferred fields with `jq`:
+
+```bash
+public-source-extractor https://example.com/ --mode json --pretty \
+  | jq '{source: .source.resolved_url, page_title: .metadata.title, extracted_title: .content.title, summary: .content.summary, warnings}'
+```
+
+Page metadata lives under `.metadata`; structured extraction lives under
+`.content`. The extracted title and summary are inferred output, so confirm
+important claims against `.source.resolved_url`.
+
 Write a new file:
 
 ```bash
