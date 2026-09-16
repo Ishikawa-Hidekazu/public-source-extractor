@@ -83,6 +83,16 @@ public-source-extractor https://example.com/ --mode json --pretty
 public-source-extractor https://example.com/ --output report.md
 ```
 
+`jq`でsource metadataと推論結果を確認する例:
+
+```bash
+public-source-extractor https://example.com/ --mode json --pretty \
+  | jq '{source: .source.resolved_url, page_title: .metadata.title, extracted_title: .content.title, summary: .content.summary, warnings}'
+```
+
+page metadataは`.metadata`、structured extractionは`.content`に入ります。
+抽出titleとsummaryは推論結果なので、重要な主張は`.source.resolved_url`の元pageでも確認してください。
+
 Markdown front matterには`provider_credits_used`と`provider_elapsed_ms`が含まれます。
 experimental providerがcreditsを返さない場合、前者は`null`になります。後者はCLIが計測した
 ミリ秒です。どちらもmetadata-onlyの値で、provider raw responseやrequest IDは出力しません。
