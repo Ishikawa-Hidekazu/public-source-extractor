@@ -1,0 +1,66 @@
+name: First-run report
+description: Share whether your first public-URL extraction worked without posting the URL or output.
+title: "[First run]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for trying Public Source Extractor. Successful first runs are useful feedback too.
+
+        This public form does not need the URL you tested, extracted page content, or raw output. Do not include credentials, tokens, cookies, signed URLs, private pages, provider request identifiers, or local paths. The experimental provider may be rate limited; do not repeatedly retry just to complete this report.
+  - type: dropdown
+    id: result
+    attributes:
+      label: First-run result
+      options:
+        - The version check and public-URL extraction both completed
+        - The version check worked, but the provider was unavailable or rate limited
+        - The URL was rejected by the public-only policy as expected
+        - I could not complete the version check or start the command
+        - Another public-safe result
+    validations:
+      required: true
+  - type: dropdown
+    id: run-method
+    attributes:
+      label: How did you run it?
+      options:
+        - uvx temporary run
+        - pipx install
+        - pip in an existing environment
+        - Tagged GitHub source
+        - Codex Agent Plugin preview
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Public Source Extractor version
+      description: Copy only the version number, not a full command transcript.
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Operating system and Python version
+      description: Public-safe versions are enough; do not include a username or path.
+      placeholder: macOS 15, Python 3.13
+    validations:
+      required: false
+  - type: textarea
+    id: note
+    attributes:
+      label: What was useful or unclear? (optional)
+      description: Describe the step, not the URL, page content, or raw provider response.
+      placeholder: The Markdown was easy to review, but I was unsure what to do after a provider rate limit.
+    validations:
+      required: false
+  - type: checkboxes
+    id: public-safety
+    attributes:
+      label: Public safety check
+      options:
+        - label: I did not include a tested URL, extracted content, credentials, tokens, cookies, signed URLs, private pages, provider request identifiers, or local paths.
+          required: true
