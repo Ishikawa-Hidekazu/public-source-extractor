@@ -75,6 +75,8 @@ The public Git tag remains an auditable fallback:
 uvx --from 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0' public-source-extractor --version
 ```
 
+If you try the quick start, a short [first-run report](https://github.com/Ishikawa-Hidekazu/public-source-extractor/issues/new?template=first_run_report.yml) helps us learn whether installation and extraction work for someone outside the project. Successful runs and provider rate limits are both useful; the form asks for neither your URL nor extracted content. For a reproducible CLI bug, use the separate [bug report](https://github.com/Ishikawa-Hidekazu/public-source-extractor/issues/new?template=bug_report.yml).
+
 PyPI publication uses GitHub Actions Trusted Publishing with short-lived OIDC
 credentials. No long-lived PyPI API token is stored in this repository.
 
