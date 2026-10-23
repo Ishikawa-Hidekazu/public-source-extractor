@@ -84,6 +84,11 @@ python3 -m pip install public-source-extractor==0.1.0
 uvx --from 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0' public-source-extractor --version
 ```
 
+はじめて試した結果を、短い[初回利用レポート](https://github.com/Ishikawa-Hidekazu/public-source-extractor/issues/new?template=first_run_report.yml)で教えてください。
+成功した場合も、コマンドの起動でつまずいた場合やproviderの待機・利用制限で止まった場合も参考になります。
+試したURLや抽出内容、認証情報、ローカルのパスは載せないでください。
+再現できるCLIの不具合は、別の[不具合報告](https://github.com/Ishikawa-Hidekazu/public-source-extractor/issues/new?template=bug_report.yml)へお願いします。
+
 PyPI公開にはGitHub Actions Trusted Publishingの短期OIDC credentialを使います。
 長期PyPI API tokenをrepositoryへ保存しません。
 
