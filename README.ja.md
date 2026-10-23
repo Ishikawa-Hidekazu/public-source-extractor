@@ -92,6 +92,27 @@ uvx --from 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git
 PyPI公開にはGitHub Actions Trusted Publishingの短期OIDC credentialを使います。
 長期PyPI API tokenをrepositoryへ保存しません。
 
+## オフライン出力見本（source checkout限定）
+
+URLを送る前に、このrepositoryのrootからPython 3.11以上で合成見本を確認できます。
+package install、API key、providerへの通信は不要です。
+installed CLIの新機能ではなく、repositoryに同梱する補助scriptです。
+
+```bash
+PYTHONPATH=src python3 examples/offline_demo.py --mode json
+PYTHONPATH=src python3 examples/offline_demo.py --mode markdown
+```
+
+JSONは`offline_fixture: true`と`live_extraction: false`で包み、実抽出との混同を防ぎます。
+summaryは`.example_output.content.summary`です。内部の日時やprovider値は元の合成見本のままで、
+抽出成功の証拠ではありません。Markdownも見本と明示し、実際のfront matterは
+[既存のMarkdown見本](examples/example-report.md)で確認します。
+`--output demo.json`を加えると、既存fileを上書きしない保存方法も試せます。
+
+準備ができたら、以下の公開URL 1件の抽出へ進みます。provider errorは別の結果として扱い、
+見本の成功を実抽出成功と数えたり、rate limitを自動再試行したりしません。
+この見本にはURL入力も、実抽出への自動切替もありません。
+
 ## 使い方
 
 ```bash
