@@ -92,6 +92,30 @@ If you try the quick start, a short [first-run report](https://github.com/Ishika
 PyPI publication uses GitHub Actions Trusted Publishing with short-lived OIDC
 credentials. No long-lived PyPI API token is stored in this repository.
 
+## Offline output preview (source checkout only)
+
+Before sending a URL, preview the bundled synthetic example with Python 3.11+
+from this repository's root. No package install, API key, or provider call is
+needed. This helper is not included as an installed CLI command.
+
+```bash
+PYTHONPATH=src python3 examples/offline_demo.py --mode json
+PYTHONPATH=src python3 examples/offline_demo.py --mode markdown
+```
+
+The JSON preview is deliberately wrapped in `offline_fixture: true` and
+`live_extraction: false`; inspect `.example_output.content.summary`, not
+`.content.summary`. Its nested example retains the original fixture timestamp
+and illustrative provider values. It is not evidence of a successful scrape.
+The Markdown preview is a labeled reading example, not live CLI output; see
+[the complete Markdown fixture](examples/example-report.md) for front matter.
+Add `--output demo.json` to practice saving a **new** file without overwriting.
+
+When ready, try one public URL below. A provider error is a separate result:
+do not report offline-preview success as live extraction success, and do not
+automatically retry a rate limit. No URL input or offline-to-live fallback is
+implemented by the preview helper.
+
 ## Quick start
 
 Markdown to stdout:
