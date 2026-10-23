@@ -33,6 +33,18 @@ crawler、browser automation、login helper、source reliability判定、private
 
 Public Source Extractorは、公開URL 1件、credential探索なし、public-only URL policy、no-overwrite出力、安定したJSON success/error contractに意図的に限定しています。確認可能なAI調査artifactを作るための小さなCLIで、公式CLIを置き換えたりwrapしたりするものではありません。providerはexperimentalな`firecrawl-keyless`です。
 
+## インストール前に出力を読む
+
+[Markdown見本](examples/example-report.md)と[JSON見本](examples/example-report.json)は、
+ブラウザだけで読めます。読むためのcloneやPythonの導入、抽出providerへの通信は不要です。
+ファイルの閲覧リクエストはGitHubへ送られます。
+どちらも固定した文書用fixtureで、今回の抽出結果ではありません。
+日時やprovider値は例示であり、今日の抽出成功を証明しません。
+JSONではsource情報の`.source` / `.metadata`と、推論結果の`.content`を分けて確認し、
+重要な主張は元のsourceでも確かめます。
+見本を読めたことをinstallや抽出の成功とは数えません。
+自分の公開URLを試す場合は以下へ進み、provider errorは別の結果として扱います。
+
 ## Install
 
 Python 3.11以上が必要です。

@@ -36,6 +36,18 @@ The [official Firecrawl CLI](https://github.com/firecrawl/cli) is the broader Fi
 
 Public Source Extractor is intentionally narrower: one public URL, no credential discovery, a public-only URL policy, no-overwrite output, and a stable JSON success/error contract designed for reviewable AI research artifacts. It uses the experimental `firecrawl-keyless` provider and does not replace or wrap the official CLI.
 
+## Preview output before installing
+
+Open the [Markdown sample](examples/example-report.md) or
+[JSON sample](examples/example-report.json) in your browser. Reading them needs
+no clone, Python installation, or extraction-provider request; GitHub serves the files.
+These are fixed documentation fixtures, not a new extraction. Their timestamps
+and provider values are illustrative, not evidence of a successful run today.
+In JSON, compare `.source` and `.metadata` with the inferred `.content` fields;
+important claims still need checking against the original source.
+Reading a sample is not installation or extraction success. To try your own
+public URL, continue below; provider errors remain separate outcomes.
+
 ## Install
 
 Public Source Extractor requires Python 3.11 or newer.
@@ -74,6 +86,8 @@ The public Git tag remains an auditable fallback:
 ```bash
 uvx --from 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.0' public-source-extractor --version
 ```
+
+If you try the quick start, a short [first-run report](https://github.com/Ishikawa-Hidekazu/public-source-extractor/issues/new?template=first_run_report.yml) helps us learn whether installation and extraction work for someone outside the project. Successful runs and provider rate limits are both useful; the form asks for neither your URL nor extracted content. For a reproducible CLI bug, use the separate [bug report](https://github.com/Ishikawa-Hidekazu/public-source-extractor/issues/new?template=bug_report.yml).
 
 PyPI publication uses GitHub Actions Trusted Publishing with short-lived OIDC
 credentials. No long-lived PyPI API token is stored in this repository.
