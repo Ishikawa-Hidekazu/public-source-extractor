@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Fixed
+
+- Reject known-invalid output destinations before contacting the extraction provider,
+  including existing targets, missing parents and symlink components. Saving still
+  revalidates the destination and uses atomic no-overwrite creation; preflight
+  cannot guarantee that permissions or the filesystem will remain unchanged.
+
 ## [0.1.0] - 2026-09-07
 
 #### Added

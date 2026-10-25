@@ -1,11 +1,17 @@
 from __future__ import annotations
 
+import os
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from public_source_extractor.errors import OutputFailure
-from public_source_extractor.output import render_markdown, write_new_file_atomic
+from public_source_extractor.output import (
+    render_markdown,
+    validate_new_file_path,
+    write_new_file_atomic,
+)
 
 
 def _envelope(credits_used: int | None = 5, elapsed_ms: int = 1234) -> dict:
@@ -47,6 +53,28 @@ class OutputTests(unittest.TestCase):
             path = Path(directory) / "report.md"
             write_new_file_atomic(path, "hello\n")
             self.assertEqual(path.read_text(), "hello\n")
+
+    def test_preflight_does_not_create_or_reserve_output(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self.assertEqual(validate_new_file_path(root / "report.md"), root.resolve())
+            self.assertEqual(list(root.iterdir()), [])
+
+    def test_atomic_link_still_rejects_a_late_file_without_leaking_temporary(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            path = root / "report.md"
+            original_link = os.link
+
+            def link(source: Path, target: Path) -> None:
+                target.write_text("concurrent file\n")
+                original_link(source, target)
+
+            with patch("public_source_extractor.output.os.link", side_effect=link):
+                with self.assertRaises(OutputFailure):
+                    write_new_file_atomic(path, "replacement\n")
+            self.assertEqual(path.read_text(), "concurrent file\n")
+            self.assertEqual(list(root.iterdir()), [path])
 
     def test_rejects_existing_file_without_overwrite(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

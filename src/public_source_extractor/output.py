@@ -88,13 +88,20 @@ def render_json(envelope: dict[str, Any], pretty: bool) -> str:
     return json.dumps(envelope, ensure_ascii=False, indent=indent, separators=None) + "\n"
 
 
-def write_new_file_atomic(path: Path, content: str) -> None:
+def validate_new_file_path(path: Path) -> Path:
     try:
         parent = path.parent.resolve(strict=True)
         _reject_symlink_components(path.parent)
         if not parent.is_dir() or path.exists() or path.is_symlink():
             raise OutputFailure()
+        return parent
+    except (OSError, RuntimeError) as exc:
+        raise OutputFailure() from exc
 
+
+def write_new_file_atomic(path: Path, content: str) -> None:
+    try:
+        parent = validate_new_file_path(path)
         fd, temporary_name = tempfile.mkstemp(prefix=f".{path.name}.", dir=parent)
         temporary = Path(temporary_name)
         try:
