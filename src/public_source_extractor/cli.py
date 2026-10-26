@@ -8,7 +8,13 @@ from typing import Sequence
 
 from . import __version__
 from .errors import ExtractorError, InputRejected
-from .output import build_success_envelope, render_json, render_markdown, write_new_file_atomic
+from .output import (
+    build_success_envelope,
+    render_json,
+    render_markdown,
+    validate_new_file_path,
+    write_new_file_atomic,
+)
 from .provider import FirecrawlKeylessProvider
 from .url_policy import validate_public_url
 
@@ -39,6 +45,8 @@ def run(argv: Sequence[str] | None = None) -> int:
         if not 1 <= args.timeout <= 120:
             raise InputRejected()
         validate_public_url(args.url)
+        if args.output is not None:
+            validate_new_file_path(args.output)
         provider = FirecrawlKeylessProvider()
         result = provider.extract(args.url, args.mode, args.timeout)
         envelope = build_success_envelope(args.url, args.mode, result)
