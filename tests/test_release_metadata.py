@@ -12,8 +12,8 @@ import public_source_extractor
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_VERSION = "0.1.0"
-TAG_VERSION = "v0.1.0"
+PACKAGE_VERSION = "0.1.1"
+TAG_VERSION = "v0.1.1"
 
 
 class ReleaseMetadataTests(unittest.TestCase):
@@ -66,7 +66,7 @@ class ReleaseMetadataTests(unittest.TestCase):
         )
 
     def test_tag_mapping_is_documented(self) -> None:
-        release_notes = (ROOT / "docs/releases/v0.1.0.md").read_text(
+        release_notes = (ROOT / f"docs/releases/{TAG_VERSION}.md").read_text(
             encoding="utf-8"
         )
         self.assertIn(PACKAGE_VERSION, release_notes)

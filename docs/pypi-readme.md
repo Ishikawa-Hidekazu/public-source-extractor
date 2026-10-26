@@ -17,20 +17,20 @@ contain prompt injection or misleading instructions.
 Run the package without a permanent install:
 
 ```bash
-uvx public-source-extractor@0.1.0 --version
-uvx public-source-extractor@0.1.0 https://example.com/
+uvx public-source-extractor@0.1.1 --version
+uvx public-source-extractor@0.1.1 https://example.com/
 ```
 
 Install it as an isolated command:
 
 ```bash
-pipx install public-source-extractor==0.1.0
+pipx install public-source-extractor==0.1.1
 ```
 
 Or install it in an existing Python 3.11+ environment:
 
 ```bash
-python3 -m pip install public-source-extractor==0.1.0
+python3 -m pip install public-source-extractor==0.1.1
 ```
 
 ## Output modes
