@@ -50,7 +50,7 @@ class ReleaseMetadataTests(unittest.TestCase):
         self.assertIn("Firecrawl Cloud", skill)
         self.assertIn("untrusted source material", skill)
         self.assertIn("private, authenticated, signed", skill)
-        self.assertIn("public-source-extractor==0.1.0", skill)
+        self.assertIn("public-source-extractor==0.1.1", skill)
         self.assertIn("verified stable package", skill)
 
     def test_python_versions_match(self) -> None:
@@ -76,9 +76,9 @@ class ReleaseMetadataTests(unittest.TestCase):
 
     def test_repository_readme_uses_verified_stable_distribution(self) -> None:
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("public-source-extractor@0.1.0", readme)
-        self.assertIn("public-source-extractor.git@v0.1.0", readme)
-        self.assertIn("Stable `0.1.0` is available", readme)
+        self.assertIn("public-source-extractor@0.1.1", readme)
+        self.assertIn("public-source-extractor.git@v0.1.1", readme)
+        self.assertIn("Stable `0.1.1` is available", readme)
 
     def test_package_index_readme_identifies_stable_package_version(self) -> None:
         pyproject = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
