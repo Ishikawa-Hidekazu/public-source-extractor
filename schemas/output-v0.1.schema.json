@@ -45,6 +45,7 @@
     },
     "warnings": {
       "type": "array",
+      "description": "Success is not semantic verification. New outputs include content_unverified; historical artifacts may predate this warning.",
       "items": {
         "type": "object",
         "additionalProperties": false,

@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Changed
+
+- Mark all successful extractions as semantically unverified with a JSON warning
+  and visible, machine-readable Markdown notice. Provider content and existing
+  JSON keys, schema version and exit codes remain unchanged. Version boundaries,
+  omitted conditions and updates still require original-publisher verification.
+
 ## [0.1.1]
 
 ### Fixed

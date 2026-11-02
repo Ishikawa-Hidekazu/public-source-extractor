@@ -131,6 +131,15 @@ public-source-extractor https://example.com/ --mode json --pretty \
 page metadataは`.metadata`、structured extractionは`.content`に入ります。
 抽出titleとsummaryは推論結果なので、重要な主張は`.source.resolved_url`の元pageでも確認してください。
 
+新しいJSON成功出力には`content_unverified`警告が常に入ります。Markdownはfront matterの
+`content_verification: "unverified"`と本文冒頭の注意書きで未検証と明示します。
+`ok: true`と終了コード0は抽出処理の完了であり、主張・影響版の境界・条件・網羅性・鮮度の
+検証済みを意味しません。例えば「8.2.35より前」と「8.2.35以前」では対象に含む版が違います。
+CLIはproviderのcontentを保持し、比較語の自動置換、欠落した追記の復元、セキュリティ判断の
+保証はしません。周辺条件や後から加わった追記も含め、発信元で確認してください。
+JSON envelopeの形とerror/終了コードは変更せず、警告とMarkdownの案内だけを追加します。
+既存の保存済みartifactは書き換えません。
+
 Markdown front matterには`provider_credits_used`と`provider_elapsed_ms`が含まれます。
 experimental providerがcreditsを返さない場合、前者は`null`になります。後者はCLIが計測した
 ミリ秒です。どちらもmetadata-onlyの値で、provider raw responseやrequest IDは出力しません。
