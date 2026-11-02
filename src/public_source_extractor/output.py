@@ -11,6 +11,12 @@ from .errors import OutputFailure
 from .provider import FirecrawlKeylessProvider, ProviderResult
 
 
+CONTENT_UNVERIFIED_MESSAGE = (
+    "Content is unverified. Extraction success does not verify claims, version boundaries, "
+    "conditions, completeness or freshness. Check the original publisher before relying on it."
+)
+
+
 def build_success_envelope(
     requested_url: str,
     mode: str,
@@ -20,7 +26,8 @@ def build_success_envelope(
         {
             "code": "experimental_provider",
             "message": "Keyless availability and limits are not guaranteed.",
-        }
+        },
+        {"code": "content_unverified", "message": CONTENT_UNVERIFIED_MESSAGE},
     ]
     if result.resolved_url is None:
         warnings.append(
@@ -74,12 +81,13 @@ def render_markdown(envelope: dict[str, Any]) -> str:
         "provider_access": provider["access"],
         "provider_credits_used": provider["credits_used"],
         "provider_elapsed_ms": provider["elapsed_ms"],
+        "content_verification": "unverified",
     }
     lines = ["---"]
     lines.extend(
         f"{key}: {json.dumps(value, ensure_ascii=False)}" for key, value in front_matter.items()
     )
-    lines.extend(["---", "", str(envelope["content"]), ""])
+    lines.extend(["---", "", f"> {CONTENT_UNVERIFIED_MESSAGE}", "", str(envelope["content"]), ""])
     return "\n".join(lines)
 
 

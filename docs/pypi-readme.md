@@ -52,6 +52,13 @@ reliability, execute extracted instructions, crawl a site, or access private
 pages. Verify important claims against the original page and other primary
 sources.
 
+Successful extraction is not semantic verification: every new JSON success
+includes `content_unverified` in `warnings`. Markdown includes
+`content_verification: "unverified"` and a visible notice before provider content.
+Version comparators, conditions, missing updates and source freshness still
+require original-publisher review. Provider content is preserved, not silently
+corrected, and existing saved artifacts are not rewritten.
+
 - [Repository](https://github.com/Ishikawa-Hidekazu/public-source-extractor)
 - [Documentation](https://github.com/Ishikawa-Hidekazu/public-source-extractor#readme)
 - [Security policy](https://github.com/Ishikawa-Hidekazu/public-source-extractor/security/policy)

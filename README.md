@@ -147,6 +147,17 @@ Page metadata lives under `.metadata`; structured extraction lives under
 `.content`. The extracted title and summary are inferred output, so confirm
 important claims against `.source.resolved_url`.
 
+Every new JSON success includes a `content_unverified` warning. Markdown output
+includes `content_verification: "unverified"` in front matter and a visible notice
+before the provider content. `ok: true` and exit code 0 mean extraction completed,
+not that the source's claims, version boundaries, conditions, coverage or freshness
+were verified. For example, "before 8.2.35" and "8.2.35 or earlier" do not include
+the same versions. The CLI preserves provider content; it does not silently
+replace comparators, recover omitted updates or certify a security decision.
+Read the original publisher, including surrounding conditions and later updates.
+The JSON envelope shape and error/exit-code contract are unchanged; the warning
+entry and Markdown notice are additive. Existing saved artifacts are not rewritten.
+
 Write a new file:
 
 ```bash
