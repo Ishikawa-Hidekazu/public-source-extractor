@@ -173,6 +173,9 @@ skillは、利用可能なら既存の`public-source-extractor` commandを使い
 version固定command、公開sourceの抽出成功、人による元page確認、失敗時の境界を、
 browser stateやlocal credentialなしで再現します。
 
+[Adobe発表の条件を照合した事例（英語）](docs/case-study-adobe-release-conditions.md)では、
+抽出成功の後も、要約に残らなかったpreview・対象app・編集可能性を原文で確認します。
+
 [公開情報をAI調査用artifactへ変換した実装ログ](https://taupe.site/entry/public-source-extractor-ai-research-cli/)では、
 より広い日常workflow、Firecrawl Cloudへの送信境界、untrustedな抽出内容、
 provider limitの観測をまとめています。
