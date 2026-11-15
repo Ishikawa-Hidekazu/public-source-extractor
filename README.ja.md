@@ -131,7 +131,10 @@ public-source-extractor https://example.com/ --mode json --pretty \
 page metadataは`.metadata`、structured extractionは`.content`に入ります。
 抽出titleとsummaryは推論結果なので、重要な主張は`.source.resolved_url`の元pageでも確認してください。
 
-新しいJSON成功出力には`content_unverified`警告が常に入ります。Markdownはfront matterの
+以下の警告は開発版（`main`）で出力されます。公開済みの`0.1.1`では出力されません。
+どちらの版でも、重要な内容は元の発信元で確認してください。
+
+`main`のJSON成功出力には`content_unverified`警告が常に入ります。Markdownはfront matterの
 `content_verification: "unverified"`と本文冒頭の注意書きで未検証と明示します。
 `ok: true`と終了コード0は抽出処理の完了であり、主張・影響版の境界・条件・網羅性・鮮度の
 検証済みを意味しません。例えば「8.2.35より前」と「8.2.35以前」では対象に含む版が違います。

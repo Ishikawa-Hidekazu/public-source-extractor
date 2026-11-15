@@ -147,7 +147,11 @@ Page metadata lives under `.metadata`; structured extraction lives under
 `.content`. The extracted title and summary are inferred output, so confirm
 important claims against `.source.resolved_url`.
 
-Every new JSON success includes a `content_unverified` warning. Markdown output
+The warnings below are available on the development branch (`main`). The
+published `0.1.1` package does not emit them. Apply the same source checks
+to output from either version.
+
+On `main`, every JSON success includes a `content_unverified` warning. Markdown output
 includes `content_verification: "unverified"` in front matter and a visible notice
 before the provider content. `ok: true` and exit code 0 mean extraction completed,
 not that the source's claims, version boundaries, conditions, coverage or freshness
