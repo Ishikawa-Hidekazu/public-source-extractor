@@ -198,6 +198,10 @@ sends the selected public URL to Firecrawl Cloud. Review the
 shows a pinned command, a successful public-source extraction, the human review
 step, and the failure boundary without using browser state or local credentials.
 
+[The Adobe release-conditions case study](docs/case-study-adobe-release-conditions.md)
+compares one successful extraction with the original preview, app-scope and
+editability conditions that its inferred content did not retain.
+
 [This Japanese implementation log](https://taupe.site/entry/public-source-extractor-ai-research-cli/)
 documents the broader daily workflow, Firecrawl Cloud boundary, untrusted
 extracted content, and observed provider limits.
