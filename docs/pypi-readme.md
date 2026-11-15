@@ -14,23 +14,25 @@ contain prompt injection or misleading instructions.
 
 ## Install and run
 
+These examples target this release, `0.1.2`.
+
 Run the package without a permanent install:
 
 ```bash
-uvx public-source-extractor@0.1.1 --version
-uvx public-source-extractor@0.1.1 https://example.com/
+uvx public-source-extractor@0.1.2 --version
+uvx public-source-extractor@0.1.2 https://example.com/
 ```
 
 Install it as an isolated command:
 
 ```bash
-pipx install public-source-extractor==0.1.1
+pipx install public-source-extractor==0.1.2
 ```
 
 Or install it in an existing Python 3.11+ environment:
 
 ```bash
-python3 -m pip install public-source-extractor==0.1.1
+python3 -m pip install public-source-extractor==0.1.2
 ```
 
 ## Output modes
@@ -52,8 +54,8 @@ reliability, execute extracted instructions, crawl a site, or access private
 pages. Verify important claims against the original page and other primary
 sources.
 
-Successful extraction is not semantic verification: every new JSON success
-includes `content_unverified` in `warnings`. Markdown includes
+Successful extraction is not semantic verification. Starting with `0.1.2`,
+every JSON success includes `content_unverified` in `warnings`. Markdown includes
 `content_verification: "unverified"` and a visible notice before provider content.
 Version comparators, conditions, missing updates and source freshness still
 require original-publisher review. Provider content is preserved, not silently
