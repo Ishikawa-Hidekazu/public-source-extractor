@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-11-16
+
 ### Changed
 
 - Mark all successful extractions as semantically unverified with a JSON warning
@@ -13,7 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
   JSON keys, schema version and exit codes remain unchanged. Version boundaries,
   omitted conditions and updates still require original-publisher verification.
 
-## [0.1.1]
+## [0.1.1] - 2026-10-26
 
 ### Fixed
 
@@ -74,7 +76,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - No crawler, authenticated-page support, browser automation, source-reliability judgment, or automatic provider fallback.
 - Initial release is source-only: no PyPI package and no manually attached build artifacts.
 
-[Unreleased]: https://github.com/Ishikawa-Hidekazu/public-source-extractor/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/Ishikawa-Hidekazu/public-source-extractor/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/Ishikawa-Hidekazu/public-source-extractor/compare/v0.1.1...v0.1.2
+[0.1.1]: https://github.com/Ishikawa-Hidekazu/public-source-extractor/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/Ishikawa-Hidekazu/public-source-extractor/compare/v0.1.0-alpha.2...v0.1.0
 [0.1.0-alpha.2]: https://github.com/Ishikawa-Hidekazu/public-source-extractor/compare/v0.1.0-alpha.1...v0.1.0-alpha.2
 [0.1.0-alpha.1]: https://github.com/Ishikawa-Hidekazu/public-source-extractor/releases/tag/v0.1.0-alpha.1
