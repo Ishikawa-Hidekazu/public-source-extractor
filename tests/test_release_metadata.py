@@ -14,10 +14,15 @@ import public_source_extractor
 ROOT = Path(__file__).resolve().parents[1]
 PACKAGE_VERSION = "0.1.2"
 TAG_VERSION = f"v{PACKAGE_VERSION}"
-PUBLISHED_VERSION = "0.1.1"
+PUBLISHED_VERSION = "0.1.2"
 
 
 class ReleaseMetadataTests(unittest.TestCase):
+    def assert_install_versions(self, text: str, expected: str) -> None:
+        pins = re.findall(r"public-source-extractor(?:@|==)([0-9]+\.[0-9]+\.[0-9]+)", text)
+        pins += re.findall(r"public-source-extractor\.git@v([0-9]+\.[0-9]+\.[0-9]+)", text)
+        self.assertEqual(set(pins), {expected})
+
     def test_codex_plugin_marketplace_and_manifest_match(self) -> None:
         marketplace = json.loads(
             (ROOT / ".agents/plugins/marketplace.json").read_text(encoding="utf-8")
@@ -51,7 +56,7 @@ class ReleaseMetadataTests(unittest.TestCase):
         self.assertIn("Firecrawl Cloud", skill)
         self.assertIn("untrusted source material", skill)
         self.assertIn("private, authenticated, signed", skill)
-        self.assertIn(f"public-source-extractor=={PUBLISHED_VERSION}", skill)
+        self.assert_install_versions(skill, PUBLISHED_VERSION)
         self.assertIn("verified stable package", skill)
 
     def test_python_versions_match(self) -> None:
@@ -77,24 +82,19 @@ class ReleaseMetadataTests(unittest.TestCase):
 
     def test_repository_readme_uses_verified_stable_distribution(self) -> None:
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn(f"public-source-extractor@{PUBLISHED_VERSION}", readme)
+        self.assert_install_versions(readme, PUBLISHED_VERSION)
         self.assertIn(f"public-source-extractor.git@v{PUBLISHED_VERSION}", readme)
         self.assertIn(f"Stable `{PUBLISHED_VERSION}` is available", readme)
-        self.assertNotIn(f"public-source-extractor@{PACKAGE_VERSION}", readme)
         readme_ja = (ROOT / "README.ja.md").read_text(encoding="utf-8")
-        self.assertIn(f"public-source-extractor@{PUBLISHED_VERSION}", readme_ja)
-        self.assertNotIn(f"public-source-extractor@{PACKAGE_VERSION}", readme_ja)
+        self.assert_install_versions(readme_ja, PUBLISHED_VERSION)
+        self.assertIn(f"public-source-extractor.git@v{PUBLISHED_VERSION}", readme_ja)
 
     def test_package_index_readme_identifies_stable_package_version(self) -> None:
         pyproject = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
         readme_config = pyproject["project"]["readme"]
         self.assertEqual(readme_config["file"], "docs/pypi-readme.md")
         pypi_readme = (ROOT / readme_config["file"]).read_text(encoding="utf-8")
-        package_pattern = re.escape(f"public-source-extractor@{PACKAGE_VERSION}")
-        self.assertGreaterEqual(len(re.findall(package_pattern, pypi_readme)), 1)
-        self.assertIn(f"public-source-extractor=={PACKAGE_VERSION}", pypi_readme)
-        self.assertNotIn(f"public-source-extractor@{PUBLISHED_VERSION}", pypi_readme)
-        self.assertNotIn(f"public-source-extractor=={PUBLISHED_VERSION}", pypi_readme)
+        self.assert_install_versions(pypi_readme, PACKAGE_VERSION)
 
     def test_pypi_publish_workflow_uses_trusted_publishing(self) -> None:
         workflow = (ROOT / ".github/workflows/publish-pypi.yml").read_text(
@@ -120,7 +120,7 @@ class ReleaseMetadataTests(unittest.TestCase):
             check=False,
         )
         rejected = subprocess.run(
-            [sys.executable, str(script), f"v{PUBLISHED_VERSION}"],
+            [sys.executable, str(script), "v0.0.0"],
             cwd=ROOT,
             capture_output=True,
             text=True,
