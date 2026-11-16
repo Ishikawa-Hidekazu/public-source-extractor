@@ -6,7 +6,7 @@
 > 入力した公開URLは、抽出のため **Firecrawl Cloud** へ送信されます。`firecrawl-keyless` providerはexperimentalです。利用可能性、匿名REST access、credit上限、長期継続は保証されません。
 
 > [!NOTE]
-> stable `0.1.1`はPyPIと対応するGitHub Releaseで公開済みです。
+> stable `0.1.2`はPyPIと対応するGitHub Releaseで公開済みです。
 > 再現性が必要な場合は、以下のversionを固定して使います。
 
 `public-source-extractor` は、AI調査workflowへ公開URLを渡す前の小さな
@@ -52,8 +52,8 @@ Python 3.11以上が必要です。
 恒久installせず、stable releaseを実行する場合:
 
 ```bash
-uvx public-source-extractor@0.1.1 --version
-uvx public-source-extractor@0.1.1 https://example.com/
+uvx public-source-extractor@0.1.2 --version
+uvx public-source-extractor@0.1.2 https://example.com/
 ```
 
 この経路には`uv`が必要で、PyPIに公開されたstable releaseを解決します。
@@ -63,25 +63,25 @@ version確認だけでは抽出を行いません。
 再現性のためpackage versionを固定する場合:
 
 ```bash
-uvx public-source-extractor@0.1.1 --version
+uvx public-source-extractor@0.1.2 --version
 ```
 
 stable releaseを隔離したcommandとしてinstallする場合:
 
 ```bash
-pipx install public-source-extractor==0.1.1
+pipx install public-source-extractor==0.1.2
 ```
 
 既存のPython環境へpipでinstallする場合:
 
 ```bash
-python3 -m pip install public-source-extractor==0.1.1
+python3 -m pip install public-source-extractor==0.1.2
 ```
 
 監査可能なfallbackとして、公開Git tagからも実行できます。
 
 ```bash
-uvx --from 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.1' public-source-extractor --version
+uvx --from 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.2' public-source-extractor --version
 ```
 
 はじめて試した結果を、短い[初回利用レポート](https://github.com/Ishikawa-Hidekazu/public-source-extractor/issues/new?template=first_run_report.yml)で教えてください。
@@ -131,10 +131,10 @@ public-source-extractor https://example.com/ --mode json --pretty \
 page metadataは`.metadata`、structured extractionは`.content`に入ります。
 抽出titleとsummaryは推論結果なので、重要な主張は`.source.resolved_url`の元pageでも確認してください。
 
-以下の警告は開発版（`main`）で出力されます。公開済みの`0.1.1`では出力されません。
-どちらの版でも、重要な内容は元の発信元で確認してください。
+以下の警告は`0.1.2`と開発版（`main`）で出力されます。旧版の`0.1.1`では出力されません。
+どの版でも、重要な内容は元の発信元で確認してください。
 
-`main`のJSON成功出力には`content_unverified`警告が常に入ります。Markdownはfront matterの
+`0.1.2`と`main`のJSON成功出力には`content_unverified`警告が常に入ります。Markdownはfront matterの
 `content_verification: "unverified"`と本文冒頭の注意書きで未検証と明示します。
 `ok: true`と終了コード0は抽出処理の完了であり、主張・影響版の境界・条件・網羅性・鮮度の
 検証済みを意味しません。例えば「8.2.35より前」と「8.2.35以前」では対象に含む版が違います。
@@ -159,7 +159,7 @@ codex plugin add public-source-extractor@ishikawa-public-tools
 ```
 
 skillは、利用可能なら既存の`public-source-extractor` commandを使い、未installなら
-`uvx`で公開確認済みのstable `0.1.1` packageを実行します。抽出時に選択した公開URLがFirecrawl Cloudへ送られる境界は
+`uvx`で公開確認済みのstable `0.1.2` packageを実行します。抽出時に選択した公開URLがFirecrawl Cloudへ送られる境界は
 変わりません。利用前に[Safety boundary](#safety-boundary)を確認してください。
 
 <picture>
@@ -241,7 +241,7 @@ network smoke testはoffline test suiteと分離します。
 
 ## Status
 
-stable `0.1.1`はpackage `0.1.1`とtag `v0.1.1`で公開済みです。
+stable `0.1.2`はpackage `0.1.2`とtag `v0.1.2`で公開済みです。
 `firecrawl-keyless`の継続性やservice availabilityは保証しません。
 
 ## License

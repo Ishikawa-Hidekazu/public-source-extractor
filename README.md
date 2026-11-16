@@ -8,7 +8,7 @@
 > The requested public URL is sent to **Firecrawl Cloud** for extraction. The `firecrawl-keyless` provider is experimental: availability, anonymous REST access, credit limits, and long-term continuity are not guaranteed.
 
 > [!NOTE]
-> Stable `0.1.1` is available from PyPI and the matching GitHub Release. Pin the
+> Stable `0.1.2` is available from PyPI and the matching GitHub Release. Pin the
 > version shown below when reproducibility matters.
 
 `public-source-extractor` is a public-URL intake guardrail for AI research
@@ -55,8 +55,8 @@ Public Source Extractor requires Python 3.11 or newer.
 Run the stable release without a permanent install:
 
 ```bash
-uvx public-source-extractor@0.1.1 --version
-uvx public-source-extractor@0.1.1 https://example.com/
+uvx public-source-extractor@0.1.2 --version
+uvx public-source-extractor@0.1.2 https://example.com/
 ```
 
 This path requires `uv` and resolves the published PyPI release. The second
@@ -66,25 +66,25 @@ does not perform extraction.
 Pin the exact package version when reproducibility matters:
 
 ```bash
-uvx public-source-extractor@0.1.1 --version
+uvx public-source-extractor@0.1.2 --version
 ```
 
 Install the stable release as an isolated command:
 
 ```bash
-pipx install public-source-extractor==0.1.1
+pipx install public-source-extractor==0.1.2
 ```
 
 Or use pip in an existing Python environment:
 
 ```bash
-python3 -m pip install public-source-extractor==0.1.1
+python3 -m pip install public-source-extractor==0.1.2
 ```
 
 The public Git tag remains an auditable fallback:
 
 ```bash
-uvx --from 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.1' public-source-extractor --version
+uvx --from 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.2' public-source-extractor --version
 ```
 
 If you try the quick start, a short [first-run report](https://github.com/Ishikawa-Hidekazu/public-source-extractor/issues/new?template=first_run_report.yml) helps us learn whether installation and extraction work for someone outside the project. Successful runs and provider rate limits are both useful; the form asks for neither your URL nor extracted content. For a reproducible CLI bug, use the separate [bug report](https://github.com/Ishikawa-Hidekazu/public-source-extractor/issues/new?template=bug_report.yml).
@@ -147,11 +147,11 @@ Page metadata lives under `.metadata`; structured extraction lives under
 `.content`. The extracted title and summary are inferred output, so confirm
 important claims against `.source.resolved_url`.
 
-The warnings below are available on the development branch (`main`). The
-published `0.1.1` package does not emit them. Apply the same source checks
-to output from either version.
+The warnings below are available in `0.1.2` and on the development branch
+(`main`). The older `0.1.1` package does not emit them. Apply the same source
+checks to output from every version.
 
-On `main`, every JSON success includes a `content_unverified` warning. Markdown output
+In `0.1.2` and on `main`, every JSON success includes a `content_unverified` warning. Markdown output
 includes `content_verification: "unverified"` in front matter and a visible notice
 before the provider content. `ok: true` and exit code 0 mean extraction completed,
 not that the source's claims, version boundaries, conditions, coverage or freshness
@@ -180,7 +180,7 @@ codex plugin add public-source-extractor@ishikawa-public-tools
 ```
 
 The skill uses an existing `public-source-extractor` command when available and
-otherwise runs the verified stable `0.1.1` package through `uvx`. Extraction still
+otherwise runs the verified stable `0.1.2` package through `uvx`. Extraction still
 sends the selected public URL to Firecrawl Cloud. Review the
 [Safety boundary](#safety-boundary) before use.
 
@@ -291,7 +291,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md), and [SUPPORT
 
 ## Status
 
-Stable `0.1.1` is available as package `0.1.1` and tag `v0.1.1`.
+Stable `0.1.2` is available as package `0.1.2` and tag `v0.1.2`.
 `firecrawl-keyless` is an experimental third-party provider, and no
 compatibility or service-availability guarantee is made.
 
