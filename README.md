@@ -8,7 +8,7 @@
 > The requested public URL is sent to **Firecrawl Cloud** for extraction. The `firecrawl-keyless` provider is experimental: availability, anonymous REST access, credit limits, and long-term continuity are not guaranteed.
 
 > [!NOTE]
-> Stable `0.1.2` is available from PyPI and the matching GitHub Release. Pin the
+> Stable `0.1.3` is available from PyPI and the matching GitHub Release. Pin the
 > version shown below when reproducibility matters.
 
 `public-source-extractor` is a public-URL intake guardrail for AI research
@@ -55,8 +55,8 @@ Public Source Extractor requires Python 3.11 or newer.
 Run the stable release without a permanent install:
 
 ```bash
-uvx public-source-extractor@0.1.2 --version
-uvx public-source-extractor@0.1.2 https://example.com/
+uvx public-source-extractor@0.1.3 --version
+uvx public-source-extractor@0.1.3 https://example.com/
 ```
 
 This path requires `uv` and resolves the published PyPI release. The second
@@ -66,25 +66,25 @@ does not perform extraction.
 Pin the exact package version when reproducibility matters:
 
 ```bash
-uvx public-source-extractor@0.1.2 --version
+uvx public-source-extractor@0.1.3 --version
 ```
 
 Install the stable release as an isolated command:
 
 ```bash
-pipx install public-source-extractor==0.1.2
+pipx install public-source-extractor==0.1.3
 ```
 
 Or use pip in an existing Python environment:
 
 ```bash
-python3 -m pip install public-source-extractor==0.1.2
+python3 -m pip install public-source-extractor==0.1.3
 ```
 
 The public Git tag remains an auditable fallback:
 
 ```bash
-uvx --from 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.2' public-source-extractor --version
+uvx --from 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.3' public-source-extractor --version
 ```
 
 If you try the quick start, a short [first-run report](https://github.com/Ishikawa-Hidekazu/public-source-extractor/issues/new?template=first_run_report.yml) helps us learn whether installation and extraction work for someone outside the project. Successful runs and provider rate limits are both useful; the form asks for neither your URL nor extracted content. For a reproducible CLI bug, use the separate [bug report](https://github.com/Ishikawa-Hidekazu/public-source-extractor/issues/new?template=bug_report.yml).
@@ -120,14 +120,14 @@ implemented by the preview helper.
 
 The examples below keep using `uvx`: it does not add a
 `public-source-extractor` command to your shell. After a `pipx` or virtualenv
-installation instead, you can replace `uvx public-source-extractor@0.1.2`
+installation instead, you can replace `uvx public-source-extractor@0.1.3`
 with `public-source-extractor` in that environment. Check `--version` rather
 than assuming an older command already on PATH is the pinned release.
 
 Markdown to stdout:
 
 ```bash
-uvx public-source-extractor@0.1.2 https://example.com/
+uvx public-source-extractor@0.1.3 https://example.com/
 ```
 
 Markdown front matter includes `provider_credits_used` and
@@ -139,13 +139,13 @@ request identifiers are not exposed.
 JSON to stdout:
 
 ```bash
-uvx public-source-extractor@0.1.2 https://example.com/ --mode json --pretty
+uvx public-source-extractor@0.1.3 https://example.com/ --mode json --pretty
 ```
 
 Save one extraction and inspect it locally with Python's standard library:
 
 ```bash
-uvx public-source-extractor@0.1.2 https://example.com/ \
+uvx public-source-extractor@0.1.3 https://example.com/ \
   --mode json --output report.json &&
 python3 -m json.tool report.json
 ```
@@ -184,7 +184,7 @@ entry and Markdown notice are additive. Existing saved artifacts are not rewritt
 Write a new file:
 
 ```bash
-uvx public-source-extractor@0.1.2 https://example.com/ --output report.md
+uvx public-source-extractor@0.1.3 https://example.com/ --output report.md
 ```
 
 The output path must have an existing non-symlink parent and must not already exist.
@@ -199,7 +199,7 @@ codex plugin add public-source-extractor@ishikawa-public-tools
 ```
 
 The skill uses an existing `public-source-extractor` command when available and
-otherwise runs the verified stable `0.1.2` package through `uvx`. Extraction still
+otherwise runs the verified stable `0.1.3` package through `uvx`. Extraction still
 sends the selected public URL to Firecrawl Cloud. Review the
 [Safety boundary](#safety-boundary) before use.
 
@@ -251,8 +251,8 @@ On failure, stdout is empty and stderr contains exactly one JSON error object. P
 Argument mistakes (for example, omitting the URL or choosing an invalid mode)
 use exit `2` / `input_rejected` with a fixed `--help` hint. A rejected URL uses
 the same code with the public-source policy message instead. Neither message
-echoes your input. This clearer argument hint is in the development version;
-the published `0.1.2` package uses the policy message for both cases.
+echoes your input. This clearer argument hint is available in `0.1.3`;
+the previous `0.1.2` package used the policy message for both cases.
 
 ### Recovering from `provider_rate_limited`
 
@@ -316,7 +316,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md), and [SUPPORT
 
 ## Status
 
-Stable `0.1.2` is available as package `0.1.2` and tag `v0.1.2`.
+Stable `0.1.3` is available as package `0.1.3` and tag `v0.1.3`.
 `firecrawl-keyless` is an experimental third-party provider, and no
 compatibility or service-availability guarantee is made.
 
