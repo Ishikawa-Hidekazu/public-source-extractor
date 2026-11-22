@@ -28,6 +28,10 @@ class InputRejected(ExtractorError):
     public_message = "The URL was rejected by the public-source safety policy."
 
 
+class UsageError(InputRejected):
+    public_message = "Invalid command arguments. Run public-source-extractor --help."
+
+
 class ProviderFailure(ExtractorError):
     code = "provider_failure"
     exit_code = 3

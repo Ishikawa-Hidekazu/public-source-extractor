@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Fixed
+
+- Keep no-permanent-install quick starts on the pinned `uvx` launcher. Save JSON
+  before local inspection so failures are not masked by a downstream pipeline
+  and requested/resolved URLs, fetch time and warnings stay together.
+- Give argument errors a fixed `--help` hint instead of a URL-policy rejection
+  message. Exit `2`, the `input_rejected` code and JSON shape stay unchanged;
+  rejected URLs retain the policy message, and argument values are not echoed.
+
 ## [0.1.2] - 2026-11-16
 
 ### Changed

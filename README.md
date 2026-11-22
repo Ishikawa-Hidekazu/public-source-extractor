@@ -118,10 +118,16 @@ implemented by the preview helper.
 
 ## Quick start
 
+The examples below keep using `uvx`: it does not add a
+`public-source-extractor` command to your shell. After a `pipx` or virtualenv
+installation instead, you can replace `uvx public-source-extractor@0.1.2`
+with `public-source-extractor` in that environment. Check `--version` rather
+than assuming an older command already on PATH is the pinned release.
+
 Markdown to stdout:
 
 ```bash
-public-source-extractor https://example.com/
+uvx public-source-extractor@0.1.2 https://example.com/
 ```
 
 Markdown front matter includes `provider_credits_used` and
@@ -133,19 +139,32 @@ request identifiers are not exposed.
 JSON to stdout:
 
 ```bash
-public-source-extractor https://example.com/ --mode json --pretty
+uvx public-source-extractor@0.1.2 https://example.com/ --mode json --pretty
 ```
 
-Inspect the source metadata and inferred fields with `jq`:
+Save one extraction and inspect it locally with Python's standard library:
 
 ```bash
-public-source-extractor https://example.com/ --mode json --pretty \
-  | jq '{source: .source.resolved_url, page_title: .metadata.title, extracted_title: .content.title, summary: .content.summary, warnings}'
+uvx public-source-extractor@0.1.2 https://example.com/ \
+  --mode json --output report.json &&
+python3 -m json.tool report.json
 ```
 
-Page metadata lives under `.metadata`; structured extraction lives under
-`.content`. The extracted title and summary are inferred output, so confirm
-important claims against `.source.resolved_url`.
+Use a new filename in an existing non-symlink directory. `&&` runs the local
+inspection only if extraction succeeds; a failed extractor must not look like
+a successful `jq` pipeline. On failure, stop and inspect the JSON error on
+stderr. No output file is created for a provider failure. An existing output
+file is refused before contacting the provider; choose another name, do not
+delete evidence just to retry. For rate limits, follow the recovery guidance
+below instead of looping requests.
+
+Re-run only `python3 -m json.tool report.json` to read the saved artifact again;
+this makes no provider request. Keep the complete file when passing it to a
+research workflow: `.source` retains the requested/resolved URLs and fetch
+time, `.metadata` records page metadata, `.provider` records the provider
+boundary, and `.warnings` includes the unverified-content notice. Inferred
+title and summary live under `.content`; verify important claims against the
+original publisher. A local re-read does not refresh the page or verify it.
 
 The warnings below are available in `0.1.2` and on the development branch
 (`main`). The older `0.1.1` package does not emit them. Apply the same source
@@ -165,7 +184,7 @@ entry and Markdown notice are additive. Existing saved artifacts are not rewritt
 Write a new file:
 
 ```bash
-public-source-extractor https://example.com/ --output report.md
+uvx public-source-extractor@0.1.2 https://example.com/ --output report.md
 ```
 
 The output path must have an existing non-symlink parent and must not already exist.
@@ -228,6 +247,12 @@ public-source-extractor <url> [--mode markdown|json]
 | `5` | Output path or write failure |
 
 On failure, stdout is empty and stderr contains exactly one JSON error object. Provider response bodies, stack traces, request IDs, and local paths are not exposed.
+
+Argument mistakes (for example, omitting the URL or choosing an invalid mode)
+use exit `2` / `input_rejected` with a fixed `--help` hint. A rejected URL uses
+the same code with the public-source policy message instead. Neither message
+echoes your input. This clearer argument hint is in the development version;
+the published `0.1.2` package uses the policy message for both cases.
 
 ### Recovering from `provider_rate_limited`
 

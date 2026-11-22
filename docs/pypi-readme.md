@@ -37,15 +37,40 @@ python3 -m pip install public-source-extractor==0.1.2
 
 ## Output modes
 
+Keep using `uvx` if you chose the no-permanent-install path. It does not add
+the bare command to PATH; a previously installed command may be an older
+version. Only use the bare command after a `pipx` or virtualenv installation
+and a version check.
+
 ```bash
-public-source-extractor https://example.com/
-public-source-extractor https://example.com/ --mode json --pretty
-public-source-extractor https://example.com/ --output report.md
+uvx public-source-extractor@0.1.2 https://example.com/
+uvx public-source-extractor@0.1.2 https://example.com/ --mode json --pretty
+uvx public-source-extractor@0.1.2 https://example.com/ --output report.md
 ```
 
 The output path must have an existing non-symlink parent and must not already
 exist. The CLI rejects local, private, authenticated, administrative, signed,
 and credential-bearing URL patterns.
+
+Save once, then inspect locally without another provider request:
+
+```bash
+uvx public-source-extractor@0.1.2 https://example.com/ \
+  --mode json --output report.json &&
+python3 -m json.tool report.json
+```
+
+`&&` keeps an extraction failure from being hidden by a successful downstream
+pipeline. Stop and read stderr on failure. Provider failures create no output
+file; an existing output path is refused before any provider call. Choose a
+new name rather than deleting previous evidence. On a rate limit, stop the
+current burst, wait, and use the original page if necessary; do not loop retries.
+
+Re-run only the `python3` command to reuse the saved file. Keep `.source`
+(requested/resolved URLs and fetch time), `.metadata`, `.provider`, `.warnings`
+and inferred `.content` together. A local re-read is not a fresh extraction
+or semantic verification. See the repository documentation for the full
+error and exit-code contract.
 
 ## Review boundary
 

@@ -47,6 +47,35 @@ class CliTests(unittest.TestCase):
     def test_unknown_option_is_stable_json(self) -> None:
         self.assert_usage_error(["https://example.com/", "--unknown"])
 
+    def test_argument_errors_offer_help_without_echoing_input_or_calling_provider(self) -> None:
+        canary = "synthetic-private-argument-do-not-echo"
+        cases = [
+            [],
+            ["https://example.com/", "--mode", canary],
+            ["https://example.com/", "--unknown", canary],
+            ["https://example.com/", "--timeout", canary],
+            ["https://example.com/", "--timeout", "0"],
+            ["https://example.com/", "--timeout", "121"],
+        ]
+        for argv in cases:
+            with self.subTest(argv=argv):
+                stdout, stderr = io.StringIO(), io.StringIO()
+                with patch("public_source_extractor.cli.FirecrawlKeylessProvider") as provider:
+                    with redirect_stdout(stdout), redirect_stderr(stderr):
+                        code = run(argv)
+                self.assertEqual(code, 2)
+                self.assertEqual(stdout.getvalue(), "")
+                self.assertEqual(stderr.getvalue().count("\n"), 1)
+                error = json.loads(stderr.getvalue())["error"]
+                self.assertEqual(error["code"], "input_rejected")
+                self.assertFalse(error["retryable"])
+                self.assertEqual(
+                    error["message"],
+                    "Invalid command arguments. Run public-source-extractor --help.",
+                )
+                self.assertNotIn(canary, stderr.getvalue())
+                provider.assert_not_called()
+
     def test_rejected_input_uses_stderr_and_exit_2(self) -> None:
         stdout = io.StringIO()
         stderr = io.StringIO()
@@ -55,6 +84,10 @@ class CliTests(unittest.TestCase):
         self.assertEqual(code, 2)
         self.assertEqual(stdout.getvalue(), "")
         self.assertEqual(json.loads(stderr.getvalue())["error"]["code"], "input_rejected")
+        self.assertEqual(
+            json.loads(stderr.getvalue())["error"]["message"],
+            "The URL was rejected by the public-source safety policy.",
+        )
 
     def test_provider_failure_uses_stderr_and_exit_3(self) -> None:
         with patch(
