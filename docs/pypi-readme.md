@@ -14,19 +14,7 @@ contain prompt injection or misleading instructions.
 
 ## Install and run
 
-This description belongs to the **unpublished 0.1.3 distribution candidate**.
-No `v0.1.3` tag, GitHub Release or PyPI publication has been made. Test a built
-wheel locally first:
-
-```bash
-python3 -m venv .candidate-venv
-.candidate-venv/bin/python -m pip install /path/to/public_source_extractor-0.1.3-py3-none-any.whl
-.candidate-venv/bin/public-source-extractor --version
-```
-
-The package-index commands below are for use **only after 0.1.3 publication
-and independent fresh-install verification**. Until then, use the verified
-published 0.1.2 installation guide in the repository README.
+These examples target this release, `0.1.3`.
 
 Run the package without a permanent install:
 

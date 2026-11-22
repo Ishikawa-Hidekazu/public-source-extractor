@@ -9,10 +9,6 @@
 > stable `0.1.2`はPyPIと対応するGitHub Releaseで公開済みです。
 > 再現性が必要な場合は、以下のversionを固定して使います。
 
-開発package `0.1.3`は未公開の配布候補です。以下の導入例は、公開確認済みの
-PyPI `0.1.2`のまま維持します。[候補の記録](docs/releases/v0.1.3.md)は
-local artifactのQA用であり、公開tagやReleaseの案内ではありません。
-
 `public-source-extractor` は、AI調査workflowへ公開URLを渡す前の小さな
 intake guardrailです。1件の公開HTTP/HTTPS URLを検証し、experimental
 providerへ送ったうえで、確認可能なMarkdownまたは固定SchemaのJSONを返します。
