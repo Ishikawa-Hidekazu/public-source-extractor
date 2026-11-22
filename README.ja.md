@@ -6,7 +6,7 @@
 > 入力した公開URLは、抽出のため **Firecrawl Cloud** へ送信されます。`firecrawl-keyless` providerはexperimentalです。利用可能性、匿名REST access、credit上限、長期継続は保証されません。
 
 > [!NOTE]
-> stable `0.1.2`はPyPIと対応するGitHub Releaseで公開済みです。
+> stable `0.1.3`はPyPIと対応するGitHub Releaseで公開済みです。
 > 再現性が必要な場合は、以下のversionを固定して使います。
 
 `public-source-extractor` は、AI調査workflowへ公開URLを渡す前の小さな
@@ -52,8 +52,8 @@ Python 3.11以上が必要です。
 恒久installせず、stable releaseを実行する場合:
 
 ```bash
-uvx public-source-extractor@0.1.2 --version
-uvx public-source-extractor@0.1.2 https://example.com/
+uvx public-source-extractor@0.1.3 --version
+uvx public-source-extractor@0.1.3 https://example.com/
 ```
 
 この経路には`uv`が必要で、PyPIに公開されたstable releaseを解決します。
@@ -63,25 +63,25 @@ version確認だけでは抽出を行いません。
 再現性のためpackage versionを固定する場合:
 
 ```bash
-uvx public-source-extractor@0.1.2 --version
+uvx public-source-extractor@0.1.3 --version
 ```
 
 stable releaseを隔離したcommandとしてinstallする場合:
 
 ```bash
-pipx install public-source-extractor==0.1.2
+pipx install public-source-extractor==0.1.3
 ```
 
 既存のPython環境へpipでinstallする場合:
 
 ```bash
-python3 -m pip install public-source-extractor==0.1.2
+python3 -m pip install public-source-extractor==0.1.3
 ```
 
 監査可能なfallbackとして、公開Git tagからも実行できます。
 
 ```bash
-uvx --from 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.2' public-source-extractor --version
+uvx --from 'git+https://github.com/Ishikawa-Hidekazu/public-source-extractor.git@v0.1.3' public-source-extractor --version
 ```
 
 はじめて試した結果を、短い[初回利用レポート](https://github.com/Ishikawa-Hidekazu/public-source-extractor/issues/new?template=first_run_report.yml)で教えてください。
@@ -117,20 +117,20 @@ summaryは`.example_output.content.summary`です。内部の日時やprovider�
 
 以下も`uvx`で続けます。`uvx`実行だけでは、shellに通常の
 `public-source-extractor`コマンドは追加されません。`pipx`やvirtualenvへ
-install済みなら、その環境内で`uvx public-source-extractor@0.1.2`を
+install済みなら、その環境内で`uvx public-source-extractor@0.1.3`を
 `public-source-extractor`へ置き換えられます。既存PATHの古い版を使っていないか、
 `--version`で確認してください。
 
 ```bash
-uvx public-source-extractor@0.1.2 https://example.com/
-uvx public-source-extractor@0.1.2 https://example.com/ --mode json --pretty
-uvx public-source-extractor@0.1.2 https://example.com/ --output report.md
+uvx public-source-extractor@0.1.3 https://example.com/
+uvx public-source-extractor@0.1.3 https://example.com/ --mode json --pretty
+uvx public-source-extractor@0.1.3 https://example.com/ --output report.md
 ```
 
 1回抽出して保存し、Python標準機能だけで読み直す例:
 
 ```bash
-uvx public-source-extractor@0.1.2 https://example.com/ \
+uvx public-source-extractor@0.1.3 https://example.com/ \
   --mode json --output report.json &&
 python3 -m json.tool report.json
 ```
@@ -175,7 +175,7 @@ codex plugin add public-source-extractor@ishikawa-public-tools
 ```
 
 skillは、利用可能なら既存の`public-source-extractor` commandを使い、未installなら
-`uvx`で公開確認済みのstable `0.1.2` packageを実行します。抽出時に選択した公開URLがFirecrawl Cloudへ送られる境界は
+`uvx`で公開確認済みのstable `0.1.3` packageを実行します。抽出時に選択した公開URLがFirecrawl Cloudへ送られる境界は
 変わりません。利用前に[Safety boundary](#safety-boundary)を確認してください。
 
 <picture>
@@ -214,10 +214,10 @@ experimental providerのavailabilityを分けて定義します。
 
 失敗時はstdoutを空にし、stderrへJSON errorを1件だけ出します。provider raw body、stack trace、request ID、local pathは出力しません。
 
-開発版では、URLの指定忘れや不正なmodeなどの引数errorを、終了コード`2` /
+`0.1.3`では、URLの指定忘れや不正なmodeなどの引数errorを、終了コード`2` /
 `input_rejected`と固定の`--help`案内で返します。URL自体の拒否は同じcodeと
-安全policyの説明を返します。入力値は表示しません。公開済み`0.1.2`では、
-引数errorにも安全policyの説明を使います。
+安全policyの説明を返します。入力値は表示しません。旧版の`0.1.2`では、
+引数errorにも安全policyの説明を使っていました。
 
 ### `provider_rate_limited`からの回復
 
@@ -262,7 +262,7 @@ network smoke testはoffline test suiteと分離します。
 
 ## Status
 
-stable `0.1.2`はpackage `0.1.2`とtag `v0.1.2`で公開済みです。
+stable `0.1.3`はpackage `0.1.3`とtag `v0.1.3`で公開済みです。
 `firecrawl-keyless`の継続性やservice availabilityは保証しません。
 
 ## License

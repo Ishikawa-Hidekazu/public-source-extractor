@@ -14,7 +14,8 @@ import public_source_extractor
 ROOT = Path(__file__).resolve().parents[1]
 PACKAGE_VERSION = "0.1.3"
 TAG_VERSION = f"v{PACKAGE_VERSION}"
-PUBLISHED_VERSION = "0.1.2"
+PUBLISHED_VERSION = "0.1.3"
+PREVIOUS_VERSION = "0.1.2"
 
 
 class ReleaseMetadataTests(unittest.TestCase):
@@ -80,7 +81,7 @@ class ReleaseMetadataTests(unittest.TestCase):
         self.assertIn(f"# {TAG_VERSION} Release Notes", release_notes)
         self.assertNotIn("unpublished", release_notes.lower())
         self.assertNotIn("distribution candidate", release_notes.lower())
-        self.assertIn(f"published `{PUBLISHED_VERSION}`", release_notes)
+        self.assertIn(f"published `{PREVIOUS_VERSION}`", release_notes)
 
     def test_changelog_identifies_the_release_and_comparison(self) -> None:
         changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
@@ -88,7 +89,7 @@ class ReleaseMetadataTests(unittest.TestCase):
             changelog,
             rf"(?m)^## \[{re.escape(PACKAGE_VERSION)}\] - \d{{4}}-\d{{2}}-\d{{2}}$",
         )
-        self.assertIn(f"compare/v{PUBLISHED_VERSION}...{TAG_VERSION}", changelog)
+        self.assertIn(f"compare/v{PREVIOUS_VERSION}...{TAG_VERSION}", changelog)
         self.assertIn(f"compare/{TAG_VERSION}...HEAD", changelog)
 
     def test_repository_readme_uses_verified_stable_distribution(self) -> None:
