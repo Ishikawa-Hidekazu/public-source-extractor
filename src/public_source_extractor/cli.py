@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Sequence
 
 from . import __version__
-from .errors import ExtractorError, InputRejected
+from .errors import ExtractorError, UsageError
 from .output import (
     build_success_envelope,
     render_json,
@@ -21,7 +21,7 @@ from .url_policy import validate_public_url
 
 class StableArgumentParser(argparse.ArgumentParser):
     def error(self, _message: str) -> None:
-        raise InputRejected()
+        raise UsageError()
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -43,7 +43,7 @@ def run(argv: Sequence[str] | None = None) -> int:
     try:
         args = build_parser().parse_args(argv)
         if not 1 <= args.timeout <= 120:
-            raise InputRejected()
+            raise UsageError()
         validate_public_url(args.url)
         if args.output is not None:
             validate_new_file_path(args.output)

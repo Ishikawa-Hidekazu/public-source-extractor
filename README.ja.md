@@ -115,21 +115,37 @@ summaryは`.example_output.content.summary`です。内部の日時やprovider�
 
 ## 使い方
 
-```bash
-public-source-extractor https://example.com/
-public-source-extractor https://example.com/ --mode json --pretty
-public-source-extractor https://example.com/ --output report.md
-```
-
-`jq`でsource metadataと推論結果を確認する例:
+以下も`uvx`で続けます。`uvx`実行だけでは、shellに通常の
+`public-source-extractor`コマンドは追加されません。`pipx`やvirtualenvへ
+install済みなら、その環境内で`uvx public-source-extractor@0.1.2`を
+`public-source-extractor`へ置き換えられます。既存PATHの古い版を使っていないか、
+`--version`で確認してください。
 
 ```bash
-public-source-extractor https://example.com/ --mode json --pretty \
-  | jq '{source: .source.resolved_url, page_title: .metadata.title, extracted_title: .content.title, summary: .content.summary, warnings}'
+uvx public-source-extractor@0.1.2 https://example.com/
+uvx public-source-extractor@0.1.2 https://example.com/ --mode json --pretty
+uvx public-source-extractor@0.1.2 https://example.com/ --output report.md
 ```
 
-page metadataは`.metadata`、structured extractionは`.content`に入ります。
-抽出titleとsummaryは推論結果なので、重要な主張は`.source.resolved_url`の元pageでも確認してください。
+1回抽出して保存し、Python標準機能だけで読み直す例:
+
+```bash
+uvx public-source-extractor@0.1.2 https://example.com/ \
+  --mode json --output report.json &&
+python3 -m json.tool report.json
+```
+
+既存の非symlink directory内で、新しいfile名を使います。`&&`により抽出成功時だけ
+保存結果を読みます。抽出失敗を後段の`jq`の成功で隠さないためです。
+失敗したら停止してstderrのJSON errorを確認してください。provider failure時には
+出力fileを作りません。既存fileはproviderへ接続する前に拒否するので、証拠を削除せず
+別名を選びます。rate limitでは以下の回復手順に従い、連続再試行しません。
+
+保存後は`python3 -m json.tool report.json`だけを実行すれば、providerへ再接続せず
+読み直せます。調査workflowへ渡す際もfile全体を保持してください。
+`.source`には要求/解決URLと取得時刻、`.metadata`にはpage metadata、`.provider`には
+provider境界、`.warnings`には未検証の注意が残ります。推論title/summaryは`.content`です。
+重要な主張は元の発信元で確認し、保存fileの再読を再取得や事実確認と混同しません。
 
 以下の警告は`0.1.2`と開発版（`main`）で出力されます。旧版の`0.1.1`では出力されません。
 どの版でも、重要な内容は元の発信元で確認してください。
@@ -197,6 +213,11 @@ experimental providerのavailabilityを分けて定義します。
 | `5` | output pathまたはwrite failure |
 
 失敗時はstdoutを空にし、stderrへJSON errorを1件だけ出します。provider raw body、stack trace、request ID、local pathは出力しません。
+
+開発版では、URLの指定忘れや不正なmodeなどの引数errorを、終了コード`2` /
+`input_rejected`と固定の`--help`案内で返します。URL自体の拒否は同じcodeと
+安全policyの説明を返します。入力値は表示しません。公開済み`0.1.2`では、
+引数errorにも安全policyの説明を使います。
 
 ### `provider_rate_limited`からの回復
 
