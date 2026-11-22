@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-11-22
+
 ### Fixed
 
 - Keep no-permanent-install quick starts on the pinned `uvx` launcher. Save JSON
@@ -85,7 +87,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - No crawler, authenticated-page support, browser automation, source-reliability judgment, or automatic provider fallback.
 - Initial release is source-only: no PyPI package and no manually attached build artifacts.
 
-[Unreleased]: https://github.com/Ishikawa-Hidekazu/public-source-extractor/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/Ishikawa-Hidekazu/public-source-extractor/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/Ishikawa-Hidekazu/public-source-extractor/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/Ishikawa-Hidekazu/public-source-extractor/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/Ishikawa-Hidekazu/public-source-extractor/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/Ishikawa-Hidekazu/public-source-extractor/compare/v0.1.0-alpha.2...v0.1.0
