@@ -11,6 +11,10 @@
 > Stable `0.1.2` is available from PyPI and the matching GitHub Release. Pin the
 > version shown below when reproducibility matters.
 
+The development package is `0.1.3`, an unpublished distribution candidate.
+The commands below intentionally remain on verified PyPI `0.1.2`; see the
+[candidate notes](docs/releases/v0.1.3.md) for local-artifact QA, not a public tag.
+
 `public-source-extractor` is a public-URL intake guardrail for AI research
 workflows. It validates one public HTTP or HTTPS URL, sends that URL to the
 experimental provider, and returns reviewable Markdown or a stable JSON

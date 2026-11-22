@@ -32,7 +32,8 @@ class FirstUseDocsTests(unittest.TestCase):
                 for block in blocks:
                     self.assertNotRegex(block, r"(?m)^public-source-extractor https://")
                 block = self.saved_report_block(name)
-                self.assertIn(f"uvx public-source-extractor@{__version__}", block)
+                expected = __version__ if name == "docs/pypi-readme.md" else "0.1.2"
+                self.assertIn(f"uvx public-source-extractor@{expected}", block)
                 self.assertIn("--mode json --output report.json &&\n", block)
                 self.assertNotIn("|", block)
 

@@ -14,25 +14,37 @@ contain prompt injection or misleading instructions.
 
 ## Install and run
 
-These examples target this release, `0.1.2`.
+This description belongs to the **unpublished 0.1.3 distribution candidate**.
+No `v0.1.3` tag, GitHub Release or PyPI publication has been made. Test a built
+wheel locally first:
+
+```bash
+python3 -m venv .candidate-venv
+.candidate-venv/bin/python -m pip install /path/to/public_source_extractor-0.1.3-py3-none-any.whl
+.candidate-venv/bin/public-source-extractor --version
+```
+
+The package-index commands below are for use **only after 0.1.3 publication
+and independent fresh-install verification**. Until then, use the verified
+published 0.1.2 installation guide in the repository README.
 
 Run the package without a permanent install:
 
 ```bash
-uvx public-source-extractor@0.1.2 --version
-uvx public-source-extractor@0.1.2 https://example.com/
+uvx public-source-extractor@0.1.3 --version
+uvx public-source-extractor@0.1.3 https://example.com/
 ```
 
 Install it as an isolated command:
 
 ```bash
-pipx install public-source-extractor==0.1.2
+pipx install public-source-extractor==0.1.3
 ```
 
 Or install it in an existing Python 3.11+ environment:
 
 ```bash
-python3 -m pip install public-source-extractor==0.1.2
+python3 -m pip install public-source-extractor==0.1.3
 ```
 
 ## Output modes
@@ -43,9 +55,9 @@ version. Only use the bare command after a `pipx` or virtualenv installation
 and a version check.
 
 ```bash
-uvx public-source-extractor@0.1.2 https://example.com/
-uvx public-source-extractor@0.1.2 https://example.com/ --mode json --pretty
-uvx public-source-extractor@0.1.2 https://example.com/ --output report.md
+uvx public-source-extractor@0.1.3 https://example.com/
+uvx public-source-extractor@0.1.3 https://example.com/ --mode json --pretty
+uvx public-source-extractor@0.1.3 https://example.com/ --output report.md
 ```
 
 The output path must have an existing non-symlink parent and must not already
@@ -55,7 +67,7 @@ and credential-bearing URL patterns.
 Save once, then inspect locally without another provider request:
 
 ```bash
-uvx public-source-extractor@0.1.2 https://example.com/ \
+uvx public-source-extractor@0.1.3 https://example.com/ \
   --mode json --output report.json &&
 python3 -m json.tool report.json
 ```

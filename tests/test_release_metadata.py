@@ -12,7 +12,7 @@ import public_source_extractor
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PACKAGE_VERSION = "0.1.2"
+PACKAGE_VERSION = "0.1.3"
 TAG_VERSION = f"v{PACKAGE_VERSION}"
 PUBLISHED_VERSION = "0.1.2"
 
@@ -77,8 +77,9 @@ class ReleaseMetadataTests(unittest.TestCase):
         )
         self.assertIn(PACKAGE_VERSION, release_notes)
         self.assertIn(TAG_VERSION, release_notes)
-        self.assertNotIn("release candidate", release_notes.lower())
-        self.assertNotIn("tag candidate", release_notes.lower())
+        self.assertIn("unpublished distribution candidate", release_notes.lower())
+        self.assertIn("No tag, GitHub Release or PyPI publication", release_notes)
+        self.assertIn("0.1.2", release_notes)
 
     def test_repository_readme_uses_verified_stable_distribution(self) -> None:
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
